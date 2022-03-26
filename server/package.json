@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "start": "nodemon ./index.js",
-    "dev": "nodemon ./index.js"
+    "start": "nodemon ./server.js",
+    "dev": "nodemon ./server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
