@@ -1,0 +1,26 @@
+запуск 
+
+./start-dev.sh
+
+клиент на 5000 порт
+
+
+----------------
+
+1 раз запускаем все миграции и сиды
+
+docker ps
+
+docker exec -it practice_project_server-dev sequelize db:migrate
+
+docker exec -it practice_project_server-dev_1 sequelize db:migrate
+
+-----------
+
+зарегистрированные у меня в базе  todo-dev
+
+buyer
+Vasya Ivanov qwerty
+
+creative 
+Tom Fox qwerty
