@@ -1,7 +1,7 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Contests', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Contests', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -84,10 +84,12 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Contests');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Contests');
   },
 };

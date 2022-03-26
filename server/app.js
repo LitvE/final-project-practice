@@ -4,6 +4,7 @@ const cors = require('cors');
 const handlerError = require('./handlerError/handler');
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 app.use('/api', router);

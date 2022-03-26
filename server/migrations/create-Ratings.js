@@ -1,7 +1,7 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Ratings', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Ratings', {
       offerId: {
         allowNull: false,
         primaryKey: true,
@@ -10,6 +10,8 @@ module.exports = {
           model: 'Offers',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -19,6 +21,8 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       mark: {
         type: Sequelize.FLOAT,
@@ -31,7 +35,7 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Ratings');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Ratings');
   },
 };

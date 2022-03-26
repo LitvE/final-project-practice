@@ -1,7 +1,7 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Banks', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Banks', {
       cardNumber: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -24,18 +24,9 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-    })
-      .then(() => queryInterface.addConstraint('Banks', {
-        type: 'check',
-        fields:  ['balance'],
-        where: {
-          balance: {
-            [ Sequelize.Op.gte ]: 0,
-          },
-        },
-      }));
+    });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Banks');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Banks');
   },
 };

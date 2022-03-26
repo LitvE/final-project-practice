@@ -1,7 +1,7 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -52,18 +52,9 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-    })
-      .then(() => queryInterface.addConstraint('Users',  {
-        type: 'check',
-        fields: ['balance'],
-        where: {
-          balance: {
-            [ Sequelize.Op.gte ]: 0,
-          },
-        },
-      }));
+    });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Users');
   },
 };

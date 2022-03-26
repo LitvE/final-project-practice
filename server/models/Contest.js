@@ -1,6 +1,4 @@
-
-
-module.exports = (sequelize, DataTypes) => {
+/*module.exports = (sequelize, DataTypes) => {
   const Contest = sequelize.define('Contests', {
     id: {
       allowNull: false,
@@ -89,5 +87,50 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  return Contest;
+};*/
+
+const {  Model } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
+
+  class Contest extends Model {
+    static associate(models) {
+      // define association here
+      Contest.belongsTo(models.User, {
+        foreignKey: {
+          field: 'userId',
+        },
+      });
+      Contest.hasMany(models.Offer, {
+        foreignKey: {
+          field: 'contestId',
+          onDelete: 'RESTRICT',
+          onUpdate: 'CASCADE',
+        },
+      });
+    }
+  }
+  Contest.init({
+    orderId: DataTypes.STRING,
+    contestType: DataTypes.ENUM('name', 'tagline', 'logo'),
+    fileName: DataTypes.STRING,
+    originalFileName: DataTypes.STRING,
+    title: DataTypes.STRING,
+    typeOfName: DataTypes.STRING,
+    industry: DataTypes.STRING,
+    focusOfWork: DataTypes.TEXT,
+    targetCustomer: DataTypes.TEXT,
+    styleName: DataTypes.STRING,
+    nameVenture: DataTypes.STRING,
+    typeOfTagline: DataTypes.STRING,
+    brandStyle: DataTypes.STRING,
+    status: DataTypes.STRING,
+    prize: DataTypes.DECIMAL,
+    priority:DataTypes.INTEGER,
+  }, {
+    sequelize,
+    modelName: 'Contest',
+  });
   return Contest;
 };

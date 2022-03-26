@@ -1,7 +1,7 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Offers', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Offers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,6 +15,8 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       contestId: {
         type: Sequelize.INTEGER,
@@ -23,6 +25,8 @@ module.exports = {
           model: 'Contests',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       text: {
         type: Sequelize.STRING,
@@ -43,7 +47,7 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Offers');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Offers');
   },
 };

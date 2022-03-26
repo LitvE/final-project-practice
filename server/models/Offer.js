@@ -1,6 +1,4 @@
-
-
-module.exports = (sequelize, DataTypes) => {
+/*module.exports = (sequelize, DataTypes) => {
   const Offer = sequelize.define('Offers', {
     id: {
       allowNull: false,
@@ -48,5 +46,37 @@ module.exports = (sequelize, DataTypes) => {
       { foreignKey: 'contest_id', sourceKey: 'id' });
   };
 
+  return Offer;
+};*/
+
+const {  Model } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
+  class Offer extends Model {
+    static associate(models) {
+      // define association here
+      Offer.belongsTo(models.User, {
+        foreignKey: {
+          field: 'userId',
+        },
+      });
+      Offer.hasOne(models.Rating, {
+        foreignKey: {
+          field: 'offerId',
+        },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+      });
+    }
+  }
+  Offer.init({
+    text: DataTypes.STRING,
+    fileName: DataTypes.STRING,
+    originalFileName: DataTypes.STRING,
+    status: DataTypes.STRING,
+  }, {
+    sequelize,
+    modelName: 'Offer',
+  });
   return Offer;
 };
