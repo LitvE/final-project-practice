@@ -18,15 +18,16 @@ module.exports.parseBody = (req, res, next) => {
 
 module.exports.canGetContest = async (req, res, next) => {
   let result = null;
+  const { params: { contestId }, tokenData: { userId, role } } = req;
   try {
-    if (req.tokenData.role === CONSTANTS.CUSTOMER) {
+    if (role === CONSTANTS.CUSTOMER) {
       result = await bd.Contests.findOne({
-        where: { id: req.headers.contestid, userId: req.tokenData.userId },
+        where: { id: contestId, userId },
       });
-    } else if (req.tokenData.role === CONSTANTS.CREATOR) {
+    } else if (role === CONSTANTS.CREATOR) {
       result = await bd.Contests.findOne({
         where: {
-          id: req.headers.contestid,
+          id: contestId,
           status: {
             [ bd.Sequelize.Op.or ]: [
               CONSTANTS.CONTEST_STATUS_ACTIVE,
@@ -43,7 +44,8 @@ module.exports.canGetContest = async (req, res, next) => {
 };
 
 module.exports.onlyForCreative = (req, res, next) => {
-  if (req.tokenData.role === CONSTANTS.CUSTOMER) {
+  const { tokenData: { role } } = req;
+  if (role === CONSTANTS.CUSTOMER) {
     next(new RightsError());
   } else {
     next();
