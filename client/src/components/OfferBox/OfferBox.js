@@ -10,7 +10,7 @@ import {
   clearChangeMarkError,
   goToExpandedDialog,
   changeShowImage,
-  changeModalShow,
+  /*changeModalShow,*/
 } from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
 import styles from './OfferBox.module.sass';
