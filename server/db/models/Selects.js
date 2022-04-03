@@ -21,14 +21,14 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class SelectBox extends Model {}
+  class Select extends Model {}
 
-  SelectBox.init({
+  Select.init({
     type: DataTypes.STRING,
     describe: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'SelectBox',
+    modelName: 'Select',
   });
-  return SelectBox;
+  return Select;
 };

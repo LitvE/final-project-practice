@@ -1,5 +1,5 @@
 //const bd = require('../../models');
-const { User } = require('../../models');
+const { User } = require('../../db/models');
 const NotFound = require('../../errors/UserNotFoundError');
 const ServerError = require('../../errors/ServerError');
 const bcrypt = require('bcrypt');

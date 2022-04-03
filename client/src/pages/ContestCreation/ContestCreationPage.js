@@ -10,7 +10,7 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 
 const ContestCreationPage = (props) => {
-  const formRef = useRef();
+  const formRef = useRef(null);
   const contestData = props.contestStore.contests[props.contestType] ? props.contestStore.contests[props.contestType] : { contestType: props.contestType };
 
   const handleSubmit = (values) => {

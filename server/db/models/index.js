@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const configPath = env === 'production' ? path.join(__dirname, '..', '..', '..',
-  '/server/config/postgresConfig.json') : path.join(__dirname, '..',
+  '/server/db/config/postgresConfig.json') : path.join(__dirname, '..',
   '/config/postgresConfig.json');
 const config = require(configPath)[ env ];
 const db = {};
@@ -51,6 +51,7 @@ db[ 'Ratings' ].belongsTo(db[ 'Offers' ],
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;*/
 
+//const sequelize = new Sequelize(config.database, config.username, config.password, config);
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -74,10 +75,10 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-/*
-sequelize.sync({force: true})
-          .then(data => console.log('Sync db is OK'))
-          .catch(err => console.log('error sync ', err));*/
+
+/*sequelize.sync({ force: true })
+  .then((data) => console.log('Sync db is OK'))
+  .catch((err) => console.log('error sync ', err));*/
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

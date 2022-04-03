@@ -119,6 +119,13 @@ module.exports = (sequelize, DataTypes) => {
           onUpdate: 'CASCADE',
         },
       });
+      User.hasMany(models.Token, {
+        foreignKey: {
+          field: 'userId',
+          onDelete: 'RESTRICT',
+          onUpdate: 'CASCADE',
+        },
+      });
     }
   }
 

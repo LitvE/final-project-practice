@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     expiry: DataTypes.STRING,
     cvc: DataTypes.STRING,
+    balance:DataTypes.DECIMAL,
   }, {
     sequelize,
     modelName: 'Banks',
