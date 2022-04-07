@@ -1,38 +1,8 @@
-/*module.exports = (sequelize, DataTypes) => {
-  const Rating = sequelize.define('Ratings', {
-    offerId: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-    },
-    mark: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 0,
-      validate: {
-        min: 0,
-        max: 5,
-      },
-    },
-  },
-  {
-    timestamps: false,
-  });
-
-  return Rating;
-};*/
-
 const {  Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Rating extends Model {
     static associate(models) {
-      // define association here
       Rating.belongsTo(models.User, {
         foreignKey:{
           field: 'userId',
@@ -46,6 +16,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Rating.init({
+    offerId: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Offers',
+        key: 'id',
+      },
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
     mark: DataTypes.FLOAT,
   }, {
     sequelize,

@@ -1,64 +1,61 @@
-/*
-function sum(a, b){
-  return a+b;
-}
+/*function sum(a, b) {
+  if (typeof a !== "number" || typeof b !== "number") {
+    throw new TypeError();
+  }
+  return a + b;
+}*/
 
-// eslint-disable-next-line no-undef
-test('Sum 2+2 equal 4', () => {
+/*test("Sum 2+2 equals 4", () => {
   const result = sum(2, 2);
-  // eslint-disable-next-line no-undef
   expect(result).toBe(4);
+});*/
+/*
+test("Sum 2+2 equals 4", () => {
+  expect(sum(2, 2)).toBe(4);
 });
 
-// eslint-disable-next-line no-undef
-test('Sum NaN + some value equal NaN', () => {
-  // eslint-disable-next-line no-undef
-  expect(sum(NaN, 1)).toBe(NaN);
+test("Sum '2':string + '2':string equal 4:number", () => {
+  expect(() => sum("2", "2")).toThrow(TypeError);
 });*/
 
 const request = require('supertest');
-const { sequelize, User } = require('../db/models');
-const { createApp } = require('../app');
+const {sequelize, User} = require('../db/models');
+const {createApp} = require('../app');
+const app = createApp();
 const yup = require('yup');
-
-const app = createApp;
-
 const testUser = {
-  firstName: `Name${Date.now()}`,
-  lastName: `Surname${Date.now()}`,
-  displayName: `Name${Date.now()}`,
-  email: 'test@gmail.com',
-  password: 'qwerty',
-  role: 'customer',
+    firstName: `Test${Date.now()}`,
+    lastName:  `Surname${Date.now()}`,
+    displayName: `DName${Date.now()}`,
+    email: `test${Date.now()}@email.com`,
+    password: 'qwerty',
+    role: 'customer',
 };
-
-// eslint-disable-next-line no-undef
-beforeAll(() => User.create(testUser));
-// eslint-disable-next-line no-undef
-afterAll(() => sequelize.close());
-
+beforeAll( () => User.create(testUser));
+afterAll( () => sequelize.close());
 const authBodySchema = yup.object({
-  data: yup.object({
-    user: yup.object().required(),
-    tokenPair: yup.object({
-      accessToken: yup.string().required(),
-      refreshToken: yup.string().required(),
-    }).required(),
-  }),
+    data: yup.object({
+        user: yup.object().required(),
+        tokenPair: yup.object({
+            accessToken: yup.string().required(),
+            refreshToken: yup.string().required(),
+        }).required()
+    })
 }).required();
-
-// eslint-disable-next-line no-undef
 describe('LOGIN', () => {
-  // eslint-disable-next-line no-undef
-  test('User must login successfully', async () => {
-    const { status, body } = await (await request(app).post('/api/login')).setEncoding({
-      email: testUser.email,
-      password: testUser.password,
+    test('User must login successfully', async () => {
+        const {status , body} = await (await request(app).post('/api/login')).setEncoding({
+            email: testUser.email,
+            password: testUser.password,
+        }); 
+        expect(status).toBe(201);
+        expect(await authBodySchema.isValid(body)).toBe(true);
     });
-    // eslint-disable-next-line no-undef
-    expect(status).toBe(200);
-    // eslint-disable-next-line no-undef
-    expect(await authBodySchema.isValid(body)).toBe(true);
-  });
-});
-
+    test('User login error with status 403', async () => {
+        const {status , body} = await (await request(app).post('/api/login')).setEncoding({
+            email: 'testemail@gmail.com',
+            password: 'qwerty',
+        }); 
+        expect(status).toBe(403);
+    })
+}); 

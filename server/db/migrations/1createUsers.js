@@ -43,10 +43,6 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      accessToken: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
       rating: {
         type: Sequelize.FLOAT,
         allowNull: false,

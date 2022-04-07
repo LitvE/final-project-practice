@@ -11,9 +11,9 @@
   },
   "test": {
     "username": "postgres",
-    "password": "admin",
+    "password": "password",
     "database": "todo-test",
-    "host": "localhost",
+    "host": "db-dev",
     "dialect": "postgres",
     "operatorsAliases": "Op"
   },

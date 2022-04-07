@@ -1,7 +1,6 @@
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Tokens', {
+    await queryInterface.createTable("RefreshTokens", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,11 +11,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         refernces: {
-          model:'Users',
-          key: 'id',
+          model: "Users",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       token: {
         type: Sequelize.UUID,
@@ -27,6 +24,9 @@ module.exports = {
       expiredIn: {
         type: Sequelize.DATE,
         allowNull: false,
+      },
+      fingerprint: {
+        type: Sequelize.STRING,
       },
       userAgent: {
         type: Sequelize.STRING,
@@ -42,6 +42,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Tokens');
+    await queryInterface.dropTable("RefreshTokens");
   },
 };

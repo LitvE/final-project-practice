@@ -1,1 +1,9 @@
-[]
+[
+  "1createUsers.js",
+  "create-Banks.js",
+  "create-Contests.js",
+  "create-Offers.js",
+  "create-Ratings.js",
+  "create-Selects.js",
+  "create-Tokens.js"
+]

@@ -1,5 +1,9 @@
 {
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin: react/rec",
+    "prettier"
+  ],
   "env": {
     "node": true,
     "browser": true,
