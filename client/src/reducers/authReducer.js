@@ -3,6 +3,7 @@ import ACTION from '../actions/actionTypes';
 const initialState = {
   isFetching: false,
   error: null,
+  isAuth: false,
 };
 
 export default function authReducer (state = initialState, action) {
@@ -11,18 +12,21 @@ export default function authReducer (state = initialState, action) {
       return {
         isFetching: true,
         error: null,
+        isAuth: false,
       };
     }
     case ACTION.AUTH_ACTION_SUCCESS: {
       return {
         isFetching: false,
         error: null,
+        isAuth: true,
       };
     }
     case ACTION.AUTH_ACTION_ERROR: {
       return {
         isFetching: false,
         error: action.error,
+        isAuth: false,
       };
     }
     case ACTION.AUTH_ACTION_CLEAR_ERROR: {

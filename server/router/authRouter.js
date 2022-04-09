@@ -1,7 +1,7 @@
 const express = require("express");
-//const validators = require('../middlewares/validators');
+const validators = require('../middlewares/validators');
 //const userController = require('../controllers/userController');
-//const hashPass = require('../middlewares/hashPassMiddle');
+const hashPass = require('../middlewares/hashPassMiddle');
 const AuthController = require("./../controllers/authController");
 const authRouter = express.Router();
 /*
@@ -19,8 +19,9 @@ authRouter.post(
 );
 */
 
-authRouter.post("/sign-in", AuthController.signInUser);
-authRouter.post("/sign-up", AuthController.signUpUser);
+authRouter.post("/sign-in", validators.validateLogin, AuthController.signInUser);
+authRouter.post("/sign-up", validators.validateRegistrationData,
+hashPass, AuthController.signUpUser);
 authRouter.post("/refresh", AuthController.refreshAuth);
 
 module.exports = authRouter;

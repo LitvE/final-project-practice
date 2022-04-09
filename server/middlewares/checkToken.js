@@ -1,7 +1,14 @@
+require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const TokenError = require('../errors/TokenError');
 const userQueries =require('../controllers/queries/userQueries');
+
+const {
+  env: {
+    ACCESS_TOKEN_SECRET,
+  },
+} = process;
 
 module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
@@ -9,8 +16,9 @@ module.exports.checkAuth = async (req, res, next) => {
     return next(new TokenError('need token'));
   }
   try {
-    const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
-    const foundUser = await userQueries.findUser({ id: tokenData.userId });
+    const tokenData = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
+    console.log(tokenData);
+    const foundUser = await userQueries.findUser({ id: tokenData.id });
     res.send({
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,
@@ -32,7 +40,7 @@ module.exports.checkToken = async (req, res, next) => {
     return next(new TokenError('need token'));
   }
   try {
-    req.tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
+    req.tokenData = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
     next();
   } catch (err) {
     next(new TokenError());

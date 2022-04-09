@@ -1,9 +1,9 @@
 const createHtppError = require("http-errors");
 const { User, RefreshToken } = require("./../db/models");
 const authService = require("./../services/authService");
-//const { passwordCompare } = require("./../controllers/queries/userQueries");
 const CONSTANTS = require("../constants");
 const bcrypt = require("bcrypt");
+const userQueries = require('./queries/userQueries');
 
 exports.signInUser = async (req, res, next) => {
   try {
@@ -11,15 +11,16 @@ exports.signInUser = async (req, res, next) => {
       body: { email, password },
     } = req;
 
-    const hashPass = await bcrypt.hash(password, CONSTANTS.SALT_ROUNDS);
-
     const foundUser = await User.findOne({
       where: { email },
     });
-    if (foundUser && hashPass === foundUser.password) {
+
+    await userQueries.passwordCompare(password, foundUser.password);
+
+    if (foundUser) {
       const data = await authService.createSession(foundUser);
-      console.dir({ data });
-      return res.send({ data });
+      const accessToken = data.tokenPair.accessToken;
+      res.send({ token: accessToken });
     }
     next(createHtppError(401, "Error password or email"));
   } catch (err) {
@@ -29,14 +30,13 @@ exports.signInUser = async (req, res, next) => {
 
 exports.signUpUser = async (req, res, next) => {
   try {
-    const { body } = req;
-    const hashPass = await bcrypt.hash(body.password, CONSTANTS.SALT_ROUNDS);
+    const { body, hashPass } = req;
     body.password = hashPass;
     const userInstance = await User.create(body);
     if (userInstance) {
       const data = await authService.createSession(userInstance);
-      console.dir({ data });
-      return res.send({ data });
+      const accessToken = data.tokenPair.accessToken;
+      return res.send({ token: accessToken });
     }
     next(createHtppError(401, "Error new user"));
   } catch (err) {

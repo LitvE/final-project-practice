@@ -23,6 +23,7 @@ class Header extends React.Component {
     };
 
     renderLoginButtons = () => {
+      console.log(this.props.data);
       if (this.props.data) {
         return (
           <>
@@ -198,6 +199,7 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => state.userStore;
+
 const mapDispatchToProps = (dispatch) => ({
   getUser: () => dispatch(headerRequest()),
   clearUserStore: () => dispatch(clearUserStore()),

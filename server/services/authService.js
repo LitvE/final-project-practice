@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwtService = require("./jwtService");
 const { RefreshToken } = require("../db/models");
-const { DEVICES_PER_LIMIT } = require("./../constants");
+const { DEVICES_LIMIT } = require("./../constants");
 const _ = require("lodash");
 
 const {
@@ -17,7 +17,7 @@ exports.createSession = async (userInstance) => {
     }
   );
 
-  if ((await userInstance.countRefreshTokens()) >= DEVICES_PER_LIMIT) {
+  if ((await userInstance.countRefreshTokens()) >= DEVICES_LIMIT) {
     const [oldRefreshTokenInstance] = await userInstance.getRefreshTokens({
       order: [["updatedAt", "ASC"]],
     });
@@ -36,6 +36,7 @@ exports.createSession = async (userInstance) => {
       updatedAt: new Date(),
     });
   }
+
   return {
     user: sendUser(userInstance),
     tokenPair: {
