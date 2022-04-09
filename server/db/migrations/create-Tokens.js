@@ -16,8 +16,7 @@ module.exports = {
         },
       },
       token: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },

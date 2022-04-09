@@ -1,18 +1,24 @@
 const createHtppError = require("http-errors");
 const { User, RefreshToken } = require("./../db/models");
 const authService = require("./../services/authService");
-const { passwordCompare } = require("./../controllers/queries/userQueries");
+//const { passwordCompare } = require("./../controllers/queries/userQueries");
+const CONSTANTS = require("../constants");
+const bcrypt = require("bcrypt");
 
 exports.signInUser = async (req, res, next) => {
   try {
     const {
       body: { email, password },
     } = req;
+
+    const hashPass = await bcrypt.hash(password, CONSTANTS.SALT_ROUNDS);
+
     const foundUser = await User.findOne({
       where: { email },
     });
-    if (foundUser && (await foundUser.passwordCompare(password))) {
+    if (foundUser && hashPass === foundUser.password) {
       const data = await authService.createSession(foundUser);
+      console.dir({ data });
       return res.send({ data });
     }
     next(createHtppError(401, "Error password or email"));
@@ -24,9 +30,12 @@ exports.signInUser = async (req, res, next) => {
 exports.signUpUser = async (req, res, next) => {
   try {
     const { body } = req;
+    const hashPass = await bcrypt.hash(body.password, CONSTANTS.SALT_ROUNDS);
+    body.password = hashPass;
     const userInstance = await User.create(body);
     if (userInstance) {
       const data = await authService.createSession(userInstance);
+      console.dir({ data });
       return res.send({ data });
     }
     next(createHtppError(401, "Error new user"));

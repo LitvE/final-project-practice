@@ -21,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       token: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },
