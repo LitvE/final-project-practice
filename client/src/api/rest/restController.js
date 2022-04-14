@@ -2,10 +2,6 @@ import http from "../interceptor";
 import queryString from "query-string";
 
 //auth
-/*
-export const registerRequest = (data) => http.post('/auth/registration', data);
-
-export const loginRequest = (data) => http.post('/auth/login', data);*/
 
 export const registerRequest = (data) => http.post("/auth/sign-up", data);
 
@@ -27,19 +23,11 @@ export const cashOut = (data) => http.post("/users/cashout", data);
 export const dataForContest = (data) =>
   http.post("/contests/dataForContest", data);
 
-/*export const getCustomersContests = (data) => http.post('/contests/getCustomersContests', { limit: data.limit, offset: data.offset }, {
-  headers: {
-    status: data.contestStatus,
-  },
-});*/
-
 export const getCustomersContests = (data) =>
-  http.get(
-    "getCustomersContests",
-    `/contests/customersContests?limit=${data.limit}&offset=${data.offset}&status=${data.contestStatus}`
+  http.get(`/contests/customersContests?limit=${data.limit}&offset=${data.offset}&status=${data.contestStatus}`
   );
 
-export const getContestById = (contestId) => http.get(`/contests/${contestId}`);
+export const getContestById = ({contestId}) => http.get(`/contests/${contestId}`);
 
 /*export const getActiveContests = ({
   offset, limit, typeIndex, contestId, industry, awardSort, ownEntries,
@@ -47,8 +35,11 @@ export const getContestById = (contestId) => http.get(`/contests/${contestId}`);
   offset, limit, typeIndex, contestId, industry, awardSort, ownEntries,
 });*/
 
-export const getActiveContests = (data) =>
-  http.post(`/contests?${queryString(data)}`);
+/*export const getActiveContests = (data) => {
+  http.post(`/contests?${queryString(data)}`)
+};*/
+
+export const getActiveContests = (data) => http.post(`/contests/?limit=${data.limit}&&offset=${data.offset}&&typeIndex=${data.typeIndex}&&contestId=${data.contestId}&&industry=${data.industry}&&awardSort=${data.awardSort}&&ownEntries=${data.ownEntries}`);
 
 export const downloadContestFile = (data) =>
   http.get(`/contests/downloadFile/${data.fileName}`);

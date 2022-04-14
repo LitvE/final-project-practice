@@ -1,4 +1,3 @@
-//const bd = require('../../models');
 const { Banks } = require('../../db/models');
 const BankDeclineError = require('../../errors/BankDeclineError');
 

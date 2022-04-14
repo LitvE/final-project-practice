@@ -1,4 +1,3 @@
-//const bd = require('../../models');
 const { Rating } = require('../../db/models');
 const ServerError = require('../../errors/ServerError');
 

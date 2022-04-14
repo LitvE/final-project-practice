@@ -18,11 +18,12 @@ class CustomerDashboard extends React.Component {
     };
 
     componentDidMount() {
+      this.props.clearContestsList();
       this.getContests();
     }
 
     getContests = () => {
-      this.props.getContests({ limit: 8, contestStatus: this.props.customerFilter });
+      this.props.getContests({ limit: 8, offset: 0, contestStatus: this.props.customerFilter });
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -31,8 +32,8 @@ class CustomerDashboard extends React.Component {
       }
     }
 
-    goToExtended = (contest_id) => {
-      this.props.history.push(`/contest/${contest_id}`);
+    goToExtended = (contestId) => {
+      this.props.history.push(`/contest/${contestId}`);
     };
 
     setContestList = () => {

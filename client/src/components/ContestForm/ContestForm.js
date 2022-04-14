@@ -66,7 +66,6 @@ class ContestForm extends React.Component {
         return <Spinner />;
       }
       else {
-        console.dir(this.props.dataForContest.data.industry);
         return (
           <>
             <div className={styles.formContainer}>

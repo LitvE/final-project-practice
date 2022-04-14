@@ -1,8 +1,6 @@
 const createHtppError = require("http-errors");
 const { User, RefreshToken } = require("./../db/models");
 const authService = require("./../services/authService");
-const CONSTANTS = require("../constants");
-const bcrypt = require("bcrypt");
 const userQueries = require('./queries/userQueries');
 
 exports.signInUser = async (req, res, next) => {
@@ -20,9 +18,10 @@ exports.signInUser = async (req, res, next) => {
     if (foundUser) {
       const data = await authService.createSession(foundUser);
       const accessToken = data.tokenPair.accessToken;
+      console.log(accessToken);
       res.send({ token: accessToken });
     }
-    next(createHtppError(401, "Error password or email"));
+    next(/*createHtppError(401, "Error password or email")*/);
   } catch (err) {
     next(err);
   }

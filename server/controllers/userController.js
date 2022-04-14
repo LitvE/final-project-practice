@@ -12,7 +12,7 @@ const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
 const { Op } = require('sequelize');
 
-
+/*
 module.exports.login = async (req, res, next) => {
   const { body: { email, password } } = req;
   try {
@@ -60,7 +60,7 @@ module.exports.registration = async (req, res, next) => {
       next(err);
     }
   }
-};
+};*/
 
 function getQuery (offerId, userId, mark, isFirst, transaction) {
   const getCreateQuery = () => ratingQueries.createRating({
@@ -111,7 +111,7 @@ module.exports.changeMark = async (req, res, next) => {
 };
 
 module.exports.payment = async (req, res, next) => {
-  const { body: { number, expiry, cvc, price, contests }, tokenData: { userId } } = req;
+  const { body: { number, expiry, cvc, price, contests }, tokenData: { id } } = req;
   const transaction = await sequelize.transaction();
   try {
     //transaction = await db.sequelize.transaction();
@@ -172,7 +172,7 @@ module.exports.payment = async (req, res, next) => {
         : Math.floor(price / contests.length);
       contest = Object.assign(contest, {
         status: index === 0 ? 'active' : 'pending',
-        userId,
+        userId: id,
         priority: index + 1,
         orderId,
         //createdAt: moment().format('YYYY-MM-DD HH:mm'),
@@ -195,13 +195,13 @@ module.exports.payment = async (req, res, next) => {
 };
 
 module.exports.updateUser = async (req, res, next) => {
-  const { file, body, tokenData: { userId } } = req;
+  const { file, body, tokenData: { id } } = req;
   try {
     if (file) {
       body.avatar = file.filename;
     }
     const updatedUser = await userQueries.updateUser(body,
-      userId);
+      id);
     res.send({
       firstName: updatedUser.firstName,
       lastName: updatedUser.lastName,
@@ -218,13 +218,13 @@ module.exports.updateUser = async (req, res, next) => {
 };
 
 module.exports.cashout = async (req, res, next) => {
-  const { body: { sum, number, expiry, cvc }, tokenData: { userId } } = req;
+  const { body: { sum, number, expiry, cvc }, tokenData: { id } } = req;
   let transaction;
   try {
     transaction = await sequelize.transaction();
     const updatedUser = await userQueries.updateUser(
       { balance: sequelize.literal('balance - ' + sum) },
-      userId, transaction);
+      id, transaction);
     await bankQueries.updateBankBalance({
       balance: sequelize.literal(`CASE 
                 WHEN "cardNumber"='${ number.replace(/ /g,

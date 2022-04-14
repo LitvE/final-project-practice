@@ -14,6 +14,12 @@ exports.createSession = async (userInstance) => {
   const { accessToken, refreshToken } = await jwtService.signTokenPair(
     {
       id: userInstance.getDataValue("id"),
+      role: userInstance.getDataValue("role"),
+      firstName: userInstance.getDataValue("firstName"),
+      lastName: userInstance.getDataValue("lastName"),
+      displayName: userInstance.getDataValue("displayName"),
+      avatar: userInstance.getDataValue("avatar"),
+      email: userInstance.getDataValue("email"),
     }
   );
 
@@ -52,6 +58,11 @@ exports.refreshSession = async (refreshTokenInstance) => {
     const { accessToken, refreshToken } = await jwtService.signTokenPair({
       id: userInstance.getDataValue("id"),
       role: userInstance.getDataValue("role"),
+      firstName: userInstance.getDataValue("firstName"),
+      lastName: userInstance.getDataValue("lastName"),
+      displayName: userInstance.getDataValue("displayName"),
+      avatar: userInstance.getDataValue("avatar"),
+      email: userInstance.getDataValue("email"),
     });
     await refreshTokenInstance.update({
       token: refreshToken,

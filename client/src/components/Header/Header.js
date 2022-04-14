@@ -23,7 +23,7 @@ class Header extends React.Component {
     };
 
     renderLoginButtons = () => {
-      console.log(this.props.data);
+
       if (this.props.data) {
         return (
           <>

@@ -33,7 +33,6 @@ module.exports.dataForContest = async (req, res, next) => {
       }
       response[ characteristic.type ].push(characteristic.describe);
     });
-    console.dir(response);
     res.send(response);
   } catch (err) {
     next(new ServerError('cannot get contest preferences'));
@@ -42,8 +41,7 @@ module.exports.dataForContest = async (req, res, next) => {
 
 module.exports.getContestById = async (req, res, next) => {
 
-  const { params: { contestId }, tokenData: { userId, role } } = req;
-
+  const { params: { contestId }, tokenData: { id, role } } = req;
   try {
     let contestInfo = await Contest.findOne({
       where: { id: contestId },
@@ -67,7 +65,7 @@ module.exports.getContestById = async (req, res, next) => {
           model: Offer,
           required: false,
           where: role === CONSTANTS.CREATOR
-            ? { userId }
+            ? { userId: id }
             : {},
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
@@ -86,7 +84,7 @@ module.exports.getContestById = async (req, res, next) => {
             {
               model: Rating,
               required: false,
-              where: { userId },
+              where: { userId: id },
               attributes: { exclude: ['userId', 'offerId'] },
             },
           ],
@@ -116,7 +114,7 @@ module.exports.downloadFile = async (req, res, next) => {
 };
 
 module.exports.updateContest = async (req, res, next) => {
-  const { file, tokenData: { userId } } = req;
+  const { file, tokenData: { id } } = req;
   if (file) {
     req.body.fileName = req.file.filename;
     req.body.originalFileName = req.file.originalname;
@@ -126,7 +124,7 @@ module.exports.updateContest = async (req, res, next) => {
   try {
     const updatedContest = await contestQueries.updateContest(req.body, {
       id: contestId,
-      userId,
+      userId: id,
     });
     res.send(updatedContest);
   } catch (e) {
@@ -135,7 +133,7 @@ module.exports.updateContest = async (req, res, next) => {
 };
 
 module.exports.setNewOffer = async (req, res, next) => {
-  const { file, tokenData: { userId }, body: { contestType, offerData, contestId, customerId } } = req;
+  const { file, tokenData: { id }, body: { contestType, offerData, contestId, customerId } } = req;
   const obj = {};
   if (contestType === CONSTANTS.LOGO_CONTEST) {
     obj.fileName = file.filename;
@@ -143,7 +141,7 @@ module.exports.setNewOffer = async (req, res, next) => {
   } else {
     obj.text = offerData;
   }
-  obj.userId = userId;
+  obj.userId = id;
   obj.contestId = contestId;
   try {
     const result = await contestQueries.createOffer(obj);
@@ -151,7 +149,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     delete result.userId;
     controller.getNotificationController().emitEntryCreated(
       customerId);
-    const User = Object.assign({}, req.tokenData, { id: userId });
+    const User = Object.assign({}, req.tokenData, { id: id });
     res.send(Object.assign({}, result, { User }));
   } catch (e) {
     return next(new ServerError());
@@ -230,9 +228,9 @@ module.exports.setOfferStatus = async (req, res, next) => {
 };
 
 module.exports.getCustomersContests = (req, res, next) => {
-  const { query: { limit, offset, status }, tokenData: userId } = req;
+  const { query: { limit, offset, status }, tokenData: { id } } = req;
   Contest.findAll({
-    where: { status, userId },
+    where: { status, userId: id },
     limit,
     offset: offset ? offset : 0,
     order: [['id', 'DESC']],
@@ -257,10 +255,11 @@ module.exports.getCustomersContests = (req, res, next) => {
 };
 
 module.exports.getContests = (req, res, next) => {
-  const { query: { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries }, tokenData: { userId } } = req;
+  const { query: { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries }, tokenData: { id } } = req;
 
   const predicates = UtilFunctions.createWhereForAllContests(typeIndex,
     contestId, industry, awardSort);
+  console.log('ownEntries is: ', ownEntries);
   Contest.findAll({
     where: predicates.where,
     order: predicates.order,
@@ -269,8 +268,8 @@ module.exports.getContests = (req, res, next) => {
     include: [
       {
         model: Offer,
-        required: ownEntries,
-        where: ownEntries ? { userId } : {},
+        //required: ownEntries,
+        //where: ownEntries ? { userId: id } : {},
         attributes: ['id'],
       },
     ],
@@ -278,6 +277,7 @@ module.exports.getContests = (req, res, next) => {
     .then(contests => {
       contests.forEach(
         contest => contest.dataValues.count = contest.dataValues.Offers.length);
+
       let haveMore = true;
       if (contests.length === 0) {
         haveMore = false;

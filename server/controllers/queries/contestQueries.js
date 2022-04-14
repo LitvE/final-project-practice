@@ -1,4 +1,3 @@
-//const bd = require('../../models');
 const { Contest, Offer } = require('../../db/models');
 const ServerError = require('../../errors/ServerError');
 
