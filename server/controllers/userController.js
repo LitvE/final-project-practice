@@ -175,13 +175,9 @@ module.exports.payment = async (req, res, next) => {
         userId: id,
         priority: index + 1,
         orderId,
-        //createdAt: moment().format('YYYY-MM-DD HH:mm'),
-        //updatedAt: moment().format('YYYY-MM-DD HH:mm'),
         prize,
       });
     });
-
-    console.dir(contests);
 
     await Contest.bulkCreate(contests, {
       feilds: ['contentType', 'title', 'industry', 'ficusOfwork', 'targetCustomer', 'status', 'brandStyle', 'prize', 'priority', 'oderId', 'userId'],
@@ -219,13 +215,15 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.cashout = async (req, res, next) => {
   const { body: { sum, number, expiry, cvc }, tokenData: { id } } = req;
-  let transaction;
+  const transaction = await sequelize.transaction();
   try {
-    transaction = await sequelize.transaction();
+    //transaction = await sequelize.transaction();
     const updatedUser = await userQueries.updateUser(
       { balance: sequelize.literal('balance - ' + sum) },
-      id, transaction);
-    await bankQueries.updateBankBalance({
+      id, 
+      transaction);
+    
+   /*await bankQueries.updateBankBalance({
       balance: sequelize.literal(`CASE 
                 WHEN "cardNumber"='${ number.replace(/ /g,
     '') }' AND "expiry"='${ expiry }' AND "cvc"='${ cvc }'
@@ -243,7 +241,38 @@ module.exports.cashout = async (req, res, next) => {
         ],
       },
     },
-    transaction);
+    transaction);*/
+
+    const squadHelpCreditCardNumber = process.env.SQUADHELP_BANK_NUMBER;
+
+    const creativeCreditCard = await Banks.findOne({
+      where: {
+        cardNumber: number.replace(/ /g, ''),
+        cvc,
+        expiry,
+      },
+      transaction,
+    });
+
+    const squadHelpCreditCard = await Banks.findOne({
+      where: {
+        cardNumber: squadHelpCreditCardNumber,
+      },
+      transaction,
+    });
+
+    await squadHelpCreditCard.update({
+      balance: sequelize.literal(`"Banks"."balance"-${ sum }`),
+    },
+    transaction,
+    );
+
+    await creativeCreditCard.update({
+      balance: sequelize.literal(`"Banks"."balance"+${ sum }`),
+    },
+    transaction,
+    );
+
     transaction.commit();
     res.send({ balance: updatedUser.balance });
   } catch (err) {
