@@ -8,6 +8,7 @@ import OurServices from '../../components/OurServices/OurServices';
 import NamingContest from '../../components/NamingContest/NamingContest';
 import TopicsSection from '../../components/TopicsSection/TopicsSection';
 import FeatureDiv from '../../components/FeatureDiv /FeatureDiv';
+import ReadyToStart from '../../components/ReadyToStart/ReadyToStart';
 
 export default class HowItWorksPage extends Component {
 
@@ -19,6 +20,7 @@ export default class HowItWorksPage extends Component {
         <OurServices />
         <NamingContest />
         <TopicsSection />
+        <ReadyToStart />
         <Statistics />
         <BenefitsAndQuestions />
         <FeatureDiv />
