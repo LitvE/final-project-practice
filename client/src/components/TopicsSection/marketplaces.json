@@ -1,0 +1,20 @@
+[
+    {
+        "spanId": "marketplaceSpanOne",
+        "divId" : "marketplaceCollapseOne",
+        "buttonText": "What's included with a Domain Purchase?",
+        "itemCardText": "When you purchase a domain from our premium domain marketplace, you will receive the exact match .com URL, a complimentary logo design (along with all source files), as well as a complimentary Trademark report and Audience Testing if you’re interested in validating your name."
+    },
+    {
+        "spanId": "marketplaceSpanTwo",
+        "divId" : "marketplaceCollapseTwo",
+        "buttonText": "How does the Domain transfer process work?",
+        "itemCardText": "Once you purchase a Domain, our transfer specialists will reach out to you (typically on the same business day). In most cases we can transfer the domain to your preferred registrar (such as GoDaddy). Once we confirm the transfer details with you, the transfers are typically initiated to your account within 1 business day."
+    },
+    {
+        "spanId": "marketplaceSpanThree",
+        "divId" : "marketplaceCollapseThree",
+        "buttonText": "If I purchase a Domain on installments, can I start using it to setup my website?",
+        "itemCardText": "We offer payment plans for many domains in our Marketplace. If you purchase a domain on a payment plan, we hold the domain in an Escrow account until it is fully paid off. However our team can assist you with making any changes to the domains (such as Nameserver changes), so that you can start using the domain right away after making your first installment payment."
+    }
+]

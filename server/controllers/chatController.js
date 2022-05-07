@@ -83,7 +83,7 @@ module.exports.addMessage = async (req, res, next) => {
 };
 
 module.exports.getChat = async (req, res, next) => {
-  const { tokenData: { id}, body: { interlocutorId } } = req;
+  const { tokenData: { id }, body: { interlocutorId } } = req;
   const participants = [id, interlocutorId];
   participants.sort(
     (participant1, participant2) => participant1 - participant2);

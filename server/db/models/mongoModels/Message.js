@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema({
   sender: {
-    type: 'Number',
+    type: Number,
     required: true,
   },
   body: {
-    type: 'String',
+    type: String,
     required: true,
   },
   conversation: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
 },

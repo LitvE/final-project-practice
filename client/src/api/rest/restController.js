@@ -1,5 +1,5 @@
 import http from "../interceptor";
-import queryString from "query-string";
+//import queryString from "query-string";
 
 //auth
 

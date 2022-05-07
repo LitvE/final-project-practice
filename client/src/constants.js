@@ -3,6 +3,9 @@ const serverIP = 'localhost';
 const serverPort = 3000;
 const CONSTANTS = {
   CUSTOMER: 'customer',
+  CONTACTS: {
+    TEL: '(877)355-3585',
+  },
   CREATOR: 'creator',
   CONTEST_STATUS_ACTIVE: 'active',
   CONTEST_STATUS_FINISHED: 'finished',

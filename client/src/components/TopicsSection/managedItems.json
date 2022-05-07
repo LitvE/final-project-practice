@@ -1,0 +1,62 @@
+[
+    {
+        "spanId": "managedSpanOne",
+        "divId" : "managedCollapseOne",
+        "buttonText": "What are Managed Contests?",
+        "p1": "The 'Managed' option is a fully managed service by Squadhelp Branding experts. It includes a formal brief preparation by Squadhelp team and management of your contest. Managed Contests are a great fit for companies that are looking for an 'Agency' like experience and they do not want to manage the contest directly.",
+        "p2": "Our branding team has directly managed hundreds of branding projects and has learned several best practices that lead to successful project outcomes. Our team will apply all best practices towards the management of your branding project.",
+        "p3": "Learn more about our ",
+        "areference": "https://www.squadhelp.com/managed-contests",
+        "atext": "Contest Service"
+    },
+    {
+        "spanId": "managedSpanTwo",
+        "divId" : "managedCollapseTwo",
+        "buttonText": "What's a typical timeline for a Managed Contest?",
+        "itemCardText": "The overall process takes 12-13 days.",
+        "lists": [
+            {
+                "text": "The Managed projects start with a project kick-off call with your Branding Consultant. You can schedule this call online immediately after making your payment."
+            },
+            {
+                "text": "After your kick-off call, the Branding consultant will write your project brief and send for your approval within 1 business day."
+            },
+            {
+                "text": "Upon your approval, the contest will go live. The branding consultant will help manage your project throughout the brainstorming phase (typically 5 days)"
+            },
+            {
+                "text": "pon the completion of brainstorming phase, the branding consultant will work with you to test the top 6 names from your Shortlist (3-5 Days). In addition, the branding consultant will coordinate the detailed Trademark screening (1-3 days)"
+            }
+        ]
+    },
+    {
+        "spanId": "managedSpanThree",
+        "divId" : "managedCollapseThree",
+        "buttonText": "How much do Managed Contests cost?",
+        "itemCardText": "We offer two levels of Managed Contests. Standard ($1499) and Enterprise ($2999). The Enterprise managed contest includes:",
+        "lists": [
+            {
+                "text": "(1) a $500 award amount (instead of $300), which will attract our top Creatives and provide more options to choose from;"
+            },
+            {
+                "text": "(2) we will ensure a senior member of our branding team is assigned to your project and the branding team will invest about 3X more time in the day-to-day management of your project;"
+            },
+            {
+                "text": "(3) you will receive more high-end trademark report and 5X more responses for your audience test."
+            },
+            {
+                "text": "Here is a link to our ",
+                "areference": "https://www.squadhelp.com/views/contests/create/managed_contests.php",
+                "atext": "Pricing page",
+                "text2": " with a detailed comparison of the two packages."
+            }
+        ]
+
+    },
+    {
+        "spanId": "managedSpanFour",
+        "divId" : "managedCollapseFour",
+        "buttonText": "What are Managed Contests?",
+        "itemCardText": "The 'Managed' option is a fully managed service by Squadhelp Branding experts. It includes a formal brief preparation by Squadhelp team and management of your contest. Managed Contests are a great fit for companies that are looking for an ''Agency' like experience and they do not want to manage the contest directly."
+    }
+]

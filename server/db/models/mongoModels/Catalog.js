@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema({
   userId: {
-    type: 'Number',
+    type: Number,
     required: true,
   },
   catalogName: {
-    type: 'String',
+    type: String,
     required: true,
   },
   chats: [

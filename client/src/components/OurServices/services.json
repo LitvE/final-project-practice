@@ -1,0 +1,26 @@
+[
+    {
+        "image": "icon1.svg",
+        "alt": "icon1",
+        "h3": "Launch a Contest",
+        "p": "Work with hundreds of creative experts to get custom name suggestions for your business or brand. All names are auto-checked for URL availability.",
+        "aText": "Launch a Contest",
+        "aHerf": "/start-contest"
+    },
+    {
+        "image": "icon2.svg",
+        "alt": "icon2",
+        "h3": "Explore Names For Sale",
+        "p": "Our branding team has curated thousands of pre-made names that you can purchase instantly. All names include a matching URL and a complimentary Logo Design.",
+        "aText": "Explore Names For Sale",
+        "aHerf": "/premium-domains-for-sale/"
+    },
+    {
+        "image": "icon3.svg",
+        "alt": "icon3",
+        "h3": "Agency-level Managed Contests",
+        "p": "Our Managed contests combine the power of crowdsourcing with the rich experience of our branding consultants. Get a complete agency-level experience at a fraction of Agency costs",
+        "aText": "Learn More",
+        "aHerf": "/managed-contests"
+    }
+]

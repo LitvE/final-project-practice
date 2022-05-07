@@ -54,6 +54,9 @@ const Home = (props) => {
                 carouselType={carouselConstants.MAIN_SLIDER}
               />
             </div>
+            <div className={styles.button}>
+                <Link className={styles.button__link} to="/how-it-works">Learn How Squadhelp Works</Link>
+              </div>
             <div className={styles.container__description}>
               <h2 className={styles.blueUnderline}>Why Squadhelp?</h2>
               <div className={styles.cardContainer}>
@@ -148,7 +151,7 @@ const Home = (props) => {
                     <span>
                         We’ll walk you through exactly what you need to share about your project
                         in order to get an awesome Name
-</span>
+                    </span>
                   </p>
                 </div>
                 <img src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/1-compressed.gif`} alt="compressed" />
