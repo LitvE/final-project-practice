@@ -1,0 +1,92 @@
+.container
+    box-sizing: border-box
+
+
+.cardDeck
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+
+@media (min-width: 576px)
+    .cardDeck 
+        flex-flow: row wrap
+        margin-right: -15px
+        margin-left: -15px
+
+@media (min-width: 992px)
+    .cardDeck 
+        display: flex!important
+        margin-right: -0.9375rem
+        margin-left: -0.9375rem
+
+.cardFrame
+    box-sizing: border-box
+    border: 1px solid #e7eaf3
+    transition: 0.3s
+    margin-bottom: 2rem!important
+    text-align: center!important
+    position: relative
+    display: flex
+    flex-direction: column
+    min-width: 0
+    word-wrap: break-word
+    background-color: #fff
+    background-clip: border-box;
+    border-radius: 0.3125rem
+
+.frameBorder
+    border-color: rgba(44,185,183,.5)!important
+    box-shadow: 0 0 5px rgba(44,185,183,.125)!important
+    border-width: 3px
+
+
+
+@media (min-width: 576px)
+    .cardFrame 
+        display: flex
+        flex: 1 0 0%
+        flex-direction: column
+        margin-right: 15px
+        margin-bottom: 0
+        margin-left: 15px
+        
+@media (min-width: 992px)
+    .cardFrame
+        margin-right: 0.9375rem
+        margin-left: 0.9375rem
+
+.cardBody
+    flex: 1 1 auto
+    padding: 1rem!important
+
+.divStyle
+    margin-bottom: 1rem!important
+    margin-right: auto!important
+    margin-left: auto!important
+
+
+.spanStyle
+    padding: 7px 15px
+    color: #fff
+    background-color: #77838f
+    border-radius: 10rem
+    display: inline-block
+    font-size: 75%
+    font-weight: 500
+    line-height: 1
+    text-align: center
+    white-space: nowrap
+    vertical-align: baseline
+    transition: all 0.2s ease-in-out
+
+.h5Style
+    font-size: 12px
+    color: #77838f!important
+    margin-bottom: 0.25rem!important
+    font-weight: 400
+    line-height: 1.5
+    margin-top: 0
+
+
+
+

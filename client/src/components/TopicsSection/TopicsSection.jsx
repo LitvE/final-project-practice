@@ -53,7 +53,7 @@ export default class TopicsSection extends Component {
                                                 <button className={styles.btnStyle} onClick={() => {this.onClickStyleChange(item.divId, item.spanId)}}>
                                                     {item.buttonText}
                                                     <span id={item.spanId} className={styles.spanContainer}>
-                                                        <span class="fas fa-arrow-down small"></span>
+                                                        <span className="fas fa-arrow-down small"></span>
                                                     </span>
                                                 </button>
                                             </h5>
@@ -110,7 +110,7 @@ export default class TopicsSection extends Component {
                                                 <button className={styles.btnStyle} onClick={() => {this.onClickStyleChange(item.divId, item.spanId)}}>
                                                     {item.buttonText}
                                                     <span id={item.spanId} className={styles.spanContainer}>
-                                                    <span class="fas fa-arrow-down small"></span>
+                                                        <span className="fas fa-arrow-down small"></span>
                                                     </span>
                                                 </button>
                                             </h5>
@@ -137,7 +137,7 @@ export default class TopicsSection extends Component {
                                                 <button className={styles.btnStyle} onClick={() => {this.onClickStyleChange(item.divId, item.spanId)}}>
                                                     {item.buttonText}
                                                     <span id={item.spanId} className={styles.spanContainer}>
-                                                    <span class="fas fa-arrow-down small"></span>
+                                                        <span className="fas fa-arrow-down small"></span>
                                                     </span>
                                                 </button>
                                             </h5>
@@ -220,7 +220,7 @@ export default class TopicsSection extends Component {
                                                 <button className={styles.btnStyle} onClick={() => {this.onClickStyleChange(item.divId, item.spanId)}}>
                                                     {item.buttonText}
                                                     <span id={item.spanId} className={styles.spanContainer}>
-                                                        <span class="fas fa-arrow-down small"></span>
+                                                        <span className="fas fa-arrow-down small"></span>
                                                     </span>
                                                 </button>
                                             </h5>

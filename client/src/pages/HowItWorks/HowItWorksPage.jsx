@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import BenefitsAndQuestions from '../../components/BenefitsAndQuestions/BenefitsAndQuestions';
@@ -10,10 +10,10 @@ import TopicsSection from '../../components/TopicsSection/TopicsSection';
 import FeatureDiv from '../../components/FeatureDiv /FeatureDiv';
 import ReadyToStart from '../../components/ReadyToStart/ReadyToStart';
 
-export default class HowItWorksPage extends Component {
+function HowItWorksPage() {
 
-  render() {
-    return (
+  
+  return (
       <>
         <Header />
         <HowDoesSHWork />
@@ -28,6 +28,8 @@ export default class HowItWorksPage extends Component {
       </>
 
 
-    )
-  }
+  )
+  
 }
+
+export default HowItWorksPage

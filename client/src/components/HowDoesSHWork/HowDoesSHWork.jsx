@@ -16,14 +16,13 @@ function HowDoesSHWork() {
                 </div>
                 <div className={styles.playBtn}>
                     <a className={styles.aStyle} href="https://vimeo.com/368584367">
-                        <small class="fas fa-play mr-2"></small>
-                        Play Video
+                        <small className="fas fa-play mr-2"></small> Play Video
                     </a>
                 </div>
             </div>
-            <div className={styles.iconContainer}>
-                <img src={`${CONSTANTS.STATIC_IMAGES_PATH}image.svg`} alt='someone'/>
-            </div>
+                <div className={styles.iconContainer}>
+                    <img src={`${CONSTANTS.STATIC_IMAGES_PATH}image.svg`} alt='someone'/>
+                </div>
             </div>
         </div>
     </div>
