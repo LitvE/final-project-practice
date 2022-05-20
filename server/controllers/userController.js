@@ -2,7 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 //const db = require('../db/models');
-const { Sequelize, sequelize, Contest, Offer, Rating, Banks } = require('../db/models');
+const { Sequelize, sequelize, Contest, Offer, Rating, Banks, User } = require('../db/models');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 //const moment = require('moment');
 const { v4: uuid } = require('uuid');
@@ -280,5 +280,3 @@ module.exports.cashout = async (req, res, next) => {
     next(err);
   }
 };
-
-

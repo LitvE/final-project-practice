@@ -17,8 +17,9 @@ module.exports.checkAuth = async (req, res, next) => {
   }
   try {
     const tokenData = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-    console.log(tokenData);
+
     const foundUser = await userQueries.findUser({ id: tokenData.id });
+    userQueries.countUsersRoles();
     res.send({
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,

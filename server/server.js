@@ -1,6 +1,6 @@
 const { app } = require('./app.js');
 const http = require('http');
-require('./db/models/mongoModels');
+require('./db/models/mongoModels/index');
 const controller = require('./socketInit');
 
 const PORT = process.env.PORT || 3000;

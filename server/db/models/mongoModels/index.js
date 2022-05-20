@@ -17,19 +17,33 @@ mongoose.connect(
 );
 
 mongoose.set('debug', env === 'development');
-mongoose.set('useCreateIndex', true);
+//mongoose.set('useCreateIndex', true);
 
 const db = {};
 
 const basename = path.basename(__filename);
-const ModelsRegExp = /^[^.].*?\.js$/;
+/*const ModelsRegExp = /^[^.].*?\.js$/;
 
 fs.readdirSync(__dirname)
   .filter((file) => ModelsRegExp.test(file) && file !== basename)
   .forEach((file) => {
     const model = require(path.join(__dirname, file));
     db[model.modelName] = model;
+  });*/
+
+  fs.readdirSync(__dirname)
+  .filter((fileName) => {
+    return (
+        fileName.indexOf('.') !== 0) 
+                && (fileName !== basename) 
+                && (fileName.slice(-3) === '.js'
+    );
+  })
+  .forEach((file) => {
+    const model = require(path.join(__dirname, file));
+    db[model.modelName] = model;
   });
+
 
 db.mongoose = mongoose;
 

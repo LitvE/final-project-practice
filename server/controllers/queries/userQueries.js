@@ -38,3 +38,19 @@ module.exports.passwordCompare = async (pass1, pass2) => {
     throw new NotFound('Wrong password');
   }
 };
+
+module.exports.countUsersRoles = async (req, res, next) => {
+  try {
+    const numberOfRoles = await User.count({
+      attributes: [
+        'role',
+      ],
+      group: 'role',
+    });
+    //res.send(numberOfRoles);
+    console.dir(numberOfRoles);
+  } catch (error) {
+    next(error);
+  }
+}
+

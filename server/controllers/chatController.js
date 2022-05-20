@@ -8,7 +8,6 @@ const { Conversation, Message, Catalog } = require('../db/models/mongoModels');
 const { User } = require('../db/models');
 const userQueries = require('./queries/userQueries');
 const controller = require('../socketInit');
-//const _ = require('lodash');
 
 module.exports.addMessage = async (req, res, next) => {
   const { tokenData: { id, firstName, lastName, displayName, avatar, email }, body: { recipient, messageBody, interlocutor } } = req;
@@ -123,6 +122,7 @@ module.exports.getChat = async (req, res, next) => {
         avatar: interlocutor.avatar,
       },
     });
+
   } catch (err) {
     next(err);
   }
@@ -165,6 +165,7 @@ module.exports.getPreview = async (req, res, next) => {
         },
       },
     ]);
+    
     const interlocutors = [];
     conversations.forEach(conversation => {
       interlocutors.push(conversation.participants.find(
@@ -189,6 +190,7 @@ module.exports.getPreview = async (req, res, next) => {
         }
       });
     });
+    //getWordsCount();
     res.send(conversations);
   } catch (err) {
     next(err);
@@ -315,3 +317,27 @@ module.exports.getCatalogs = async (req, res, next) => {
     next(err);
   }
 };
+
+const getWordsCount = async () => {
+  try {
+    const wordCount = await Message.aggregate(
+      [
+        {
+          $match: {body: /паровоз/}
+        },
+        {
+          $group: {
+            _id: null,
+            count: {
+              $sum: 1,
+            }
+          }
+        }
+      ]
+    );
+    
+    console.dir(wordCount);
+  } catch (error) {
+    console.log(error);
+  }
+}
