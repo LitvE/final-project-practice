@@ -1,7 +1,8 @@
-const { User } = require('../../db/models');
+const { User, Contest, sequelize } = require('../../db/models');
 const NotFound = require('../../errors/UserNotFoundError');
 const ServerError = require('../../errors/ServerError');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 module.exports.updateUser = async (data, userId, transaction) => {
 
@@ -52,5 +53,54 @@ module.exports.countUsersRoles = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+}
+
+module.exports.bonusToPay = async () => {
+
+  const selectedContests = await Contest.findAll({
+    attributes: [[sequelize.fn('sum', sequelize.col('prize')), 'totalPrizes']],
+    where: {
+      createdAt: {
+          [Op.between]: ['2021-12-25','2022-01-14'],
+      },
+    },
+    include: [
+      {
+        model: User,
+      }
+    ],
+    group: ['User.id'],
+    row: true,
+  });
+
+  selectedContests.forEach(async (sc) => {
+      const userToUpdateBalance = await User.findByPk(sc.User.id);
+
+      userToUpdateBalance.update({
+          balance: (sc.User.balance + (sc.dataValues.totalPrizes*0.1)),
+      });
+  });
+};
+
+module.exports.bonusForRating = async () => {
+  const creatorsWithHighestRating = await User.findAll(
+    {
+      where: {
+        role: 'creator',
+      },
+      order: [['rating', 'DESC']],
+      limit: 3,
+    }
+  );
+
+  creatorsWithHighestRating.forEach(async (creator) => {
+    
+    const userToUpdateBalance = await User.findByPk(creator.id);
+
+    userToUpdateBalance.update({
+        balance: (creator.balance + 10.00),
+    });
+  });
+
 }
 
