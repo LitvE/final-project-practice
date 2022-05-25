@@ -2,6 +2,7 @@ const createHtppError = require("http-errors");
 const { User, RefreshToken } = require("./../db/models");
 const authService = require("./../services/authService");
 const userQueries = require('./queries/userQueries');
+const {errorLogging} = require('../utils/logFunction');
 
 exports.signInUser = async (req, res, next) => {
   try {
@@ -23,6 +24,7 @@ exports.signInUser = async (req, res, next) => {
     }
     next(/*createHtppError(401, "Error password or email")*/);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -39,6 +41,7 @@ exports.signUpUser = async (req, res, next) => {
     }
     next(createHtppError(401, "Error new user"));
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -59,6 +62,7 @@ exports.refreshAuth = async (req, res, next) => {
     }
     next(createHtppError(401, "Error tokens"));
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };

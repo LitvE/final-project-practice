@@ -8,6 +8,7 @@ const controller = require('../socketInit');
 const UtilFunctions = require('../utils/functions');
 const CONSTANTS = require('../constants');
 const { Op } = require('sequelize');
+const {errorLogging} = require('../utils/logFunction');
 
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
@@ -35,6 +36,7 @@ module.exports.dataForContest = async (req, res, next) => {
     });
     res.send(response);
   } catch (err) {
+    errorLogging(err);
     next(new ServerError('cannot get contest preferences'));
   }
 };
@@ -101,13 +103,13 @@ module.exports.getContestById = async (req, res, next) => {
     });
     res.send(contestInfo);
   } catch (e) {
+    errorLogging(e);
     next(new ServerError());
   }
 };
 
 module.exports.downloadFile = async (req, res, next) => {
   const { params: { fileName } } = req;
-  //const file = CONSTANTS.CONTESTS_DEFAULT_DIR + req.params.fileName;
   const file = CONSTANTS.CONTESTS_DEFAULT_DIR + fileName;
   res.download(file);
   next();
@@ -128,6 +130,7 @@ module.exports.updateContest = async (req, res, next) => {
     });
     res.send(updatedContest);
   } catch (e) {
+    errorLogging(e);
     next(e);
   }
 };
@@ -152,6 +155,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     const User = Object.assign({}, req.tokenData, { id: id });
     res.send(Object.assign({}, result, { User }));
   } catch (e) {
+    errorLogging(e);
     return next(new ServerError());
   }
 };
@@ -222,6 +226,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
       res.send(winningOffer);
     } catch (err) {
       transaction.rollback();
+      errorLogging(err);
       next(err);
     }
   }
@@ -251,7 +256,10 @@ module.exports.getCustomersContests = (req, res, next) => {
       }
       res.send({ contests, haveMore });
     })
-    .catch(err => next(new ServerError(err)));
+    .catch((err) => {
+      errorLogging(err);
+      next(new ServerError(err));
+    });
 };
 
 module.exports.getContests = (req, res, next) => {
@@ -284,7 +292,8 @@ module.exports.getContests = (req, res, next) => {
       }
       res.send({ contests, haveMore });
     })
-    .catch(err => {
+    .catch((err) => {
+      errorLogging(err);
       next(new ServerError(err));
     });
 };

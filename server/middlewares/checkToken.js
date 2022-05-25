@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const TokenError = require('../errors/TokenError');
 const userQueries =require('../controllers/queries/userQueries');
+const {errorLogging} = require('../utils/logFunction')
 
 const {
   env: {
@@ -13,7 +14,9 @@ const {
 module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
   if (!accessToken) {
-    return next(new TokenError('need token'));
+    const err = new TokenError('need token');
+    errorLogging(err);
+    return next(err);
   }
   try {
     const tokenData = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
@@ -31,6 +34,7 @@ module.exports.checkAuth = async (req, res, next) => {
       email: foundUser.email,
     });
   } catch (err) {
+    errorLogging(err);
     next(new TokenError());
   }
 };
@@ -38,12 +42,15 @@ module.exports.checkAuth = async (req, res, next) => {
 module.exports.checkToken = async (req, res, next) => {
   const accessToken = req.headers.authorization;
   if (!accessToken) {
-    return next(new TokenError('need token'));
+    const err = new TokenError('need token');
+    errorLogging(err);
+    return next(err);
   }
   try {
     req.tokenData = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
     next();
   } catch (err) {
+    errorLogging(err);
     next(new TokenError());
   }
 };

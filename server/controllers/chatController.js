@@ -8,6 +8,7 @@ const { Conversation, Message, Catalog } = require('../db/models/mongoModels');
 const { User } = require('../db/models');
 const userQueries = require('./queries/userQueries');
 const controller = require('../socketInit');
+const {errorLogging} = require('../utils/logFunction');
 
 module.exports.addMessage = async (req, res, next) => {
   const { tokenData: { id, firstName, lastName, displayName, avatar, email }, body: { recipient, messageBody, interlocutor } } = req;
@@ -77,6 +78,7 @@ module.exports.addMessage = async (req, res, next) => {
       preview: Object.assign(preview, { interlocutor }),
     });
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -124,6 +126,7 @@ module.exports.getChat = async (req, res, next) => {
     });
 
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -193,6 +196,7 @@ module.exports.getPreview = async (req, res, next) => {
     //getWordsCount();
     res.send(conversations);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -211,6 +215,7 @@ module.exports.blackList = async (req, res) => {
       (participant) => participant !== id)[ 0 ];
     controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
   } catch (err) {
+    errorLogging(err);
     res.send(err);
   }
 };
@@ -225,6 +230,7 @@ module.exports.favoriteChat = async (req, res) => {
       { $set: { [ predicate ]: favoriteFlag } }, { new: true });
     res.send(chat);
   } catch (err) {
+    errorLogging(err);
     res.send(err);
   }
 };
@@ -241,6 +247,7 @@ module.exports.createCatalog = async (req, res, next) => {
     await catalog.save();
     res.send(catalog);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -255,6 +262,7 @@ module.exports.updateNameCatalog = async (req, res, next) => {
     }, { catalogName }, { new: true });
     res.send(catalog);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -269,6 +277,7 @@ module.exports.addNewChatToCatalog = async (req, res, next) => {
     }, { $addToSet: { chats: chatId } }, { new: true });
     res.send(catalog);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -283,6 +292,7 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
     }, { $pull: { chats: chatId } }, { new: true });
     res.send(catalog);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -294,6 +304,7 @@ module.exports.deleteCatalog = async (req, res, next) => {
       { _id: catalogId, userId: id });
     res.end();
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -314,6 +325,7 @@ module.exports.getCatalogs = async (req, res, next) => {
     ]);
     res.send(catalogs);
   } catch (err) {
+    errorLogging(err);
     next(err);
   }
 };
@@ -338,6 +350,7 @@ const getWordsCount = async () => {
     
     console.dir(wordCount);
   } catch (error) {
-    console.log(error);
+    errorLogging(err);
+    //console.log(error);
   }
 }
