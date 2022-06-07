@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
           field: "userId",
         },
       });
+      User.hasMany(models.Catalog, {
+        foreignKey: {
+          field: "userId",
+        },
+      });
     }
   }
 

@@ -27,9 +27,25 @@ const DialogList = (props) => {
     event.stopPropagation();
   };
 
-  const onlyFavoriteDialogs = (chatPreview, userId) => chatPreview.favoriteList[chatPreview.participants.indexOf(userId)];
+  /*const onlyFavoriteDialogs = (chatPreview, userId) => chatPreview.favoriteList[chatPreview.participants.indexOf(userId)];*/
 
-  const onlyBlockDialogs = (chatPreview, userId) => chatPreview.blackList[chatPreview.participants.indexOf(userId)];
+  const onlyFavoriteDialogs = (chatPreview, userId) => {
+    if(chatPreview.participant1 === userId){
+      return chatPreview.favoriteList[0];
+    } else if (chatPreview.participant2 === userId){
+      return chatPreview.favoriteList[1];
+    } else {return}
+  };
+
+  /*const onlyBlockDialogs = (chatPreview, userId) => chatPreview.blackList[chatPreview.participants.indexOf(userId)];*/
+
+  const onlyBlockDialogs = (chatPreview, userId) => {
+    if(chatPreview.participant1 === userId){
+      return chatPreview.blackList[0];
+    } else if (chatPreview.participant2 === userId){
+      return chatPreview.blackList[1];
+    } else {return}
+  }
 
   const getTimeStr = (time) => {
     const currentTime = moment();

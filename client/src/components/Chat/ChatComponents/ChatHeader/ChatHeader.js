@@ -17,13 +17,25 @@ const ChatHeader = (props) => {
   };
 
   const isFavorite = (chatData, userId) => {
-    const { favoriteList, participants } = chatData;
-    return favoriteList[participants.indexOf(userId)];
+    /*const { favoriteList, participants } = chatData;
+    return favoriteList[participants.indexOf(userId)];*/
+    const {participant1, participant2, favoriteList} = chatData;
+    if (userId === participant1){
+      return favoriteList[0];
+    } else if(userId === participant2){
+      return favoriteList[1];
+    } else {return}
   };
 
   const isBlocked = (chatData, userId) => {
-    const { participants, blackList } = chatData;
-    return blackList[participants.indexOf(userId)];
+    /*const { participants, blackList } = chatData;
+    return blackList[participants.indexOf(userId)];*/
+    const {participant1, participant2, blackList} = chatData;
+    if (userId === participant1){
+      return blackList[0];
+    } else if(userId === participant2){
+      return blackList[1];
+    } else {return}
   };
 
   const { avatar, firstName } = props.interlocutor;
@@ -46,7 +58,9 @@ const ChatHeader = (props) => {
                 <div>
                   <i
                     onClick={(event) => changeFavorite({
-                      participants: chatData.participants,
+                      /*participants: chatData.participants,*/
+                      participant1: chatData.participant1,
+                      participant2: chatData.participant2,
                       favoriteFlag: !isFavorite(chatData, userId),
                     }, event)}
                     className={classNames({
@@ -56,7 +70,9 @@ const ChatHeader = (props) => {
                   />
                   <i
                     onClick={(event) => changeBlackList({
-                      participants: chatData.participants,
+                      /*participants: chatData.participants,*/
+                      participant1: chatData.participant1,
+                      participant2: chatData.participant2,
                       blackListFlag: !isBlocked(chatData, userId),
                     }, event)}
                     className={classNames({
