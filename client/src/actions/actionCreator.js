@@ -89,6 +89,11 @@ export const changeMark = (data) => ({
   data,
 });
 
+export const getOffersAction = (data) => ({
+  type: ACTION.GET_OFFERS_ACTION,
+  data,
+});
+
 export const setOffer = (data) => ({
   type: ACTION.SET_OFFER_ACTION,
   data,

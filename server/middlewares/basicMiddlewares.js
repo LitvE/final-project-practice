@@ -65,6 +65,15 @@ module.exports.onlyForCustomer = (req, res, next) => {
   }
 };
 
+module.exports.onlyForModerator = (req, res, next) => {
+  const { tokenData: { role } } = req;
+  if(role !== CONSTANTS.MODERATOR) {
+    return next(new RightsError('this page only for moderators'));
+  } else {
+    next();
+  }
+};
+
 module.exports.canSendOffer = async (req, res, next) => {
   const { tokenData: { role }, body: {contestId} } = req;
   if (role === CONSTANTS.CUSTOMER) {
@@ -90,7 +99,7 @@ module.exports.canSendOffer = async (req, res, next) => {
 };
 
 module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
-  const { tokenData: { id }, body: {contestId} } = req;
+  const { tokenData: { id, role }, body: {contestId} } = req;
   try {
     const result = await Contest.findOne({
       where: {
@@ -99,7 +108,7 @@ module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
         status: CONSTANTS.CONTEST_STATUS_ACTIVE,
       },
     });
-    if (!result) {
+    if (!result && role !== CONSTANTS.MODERATOR) {
       return next(new RightsError());
     }
     next();

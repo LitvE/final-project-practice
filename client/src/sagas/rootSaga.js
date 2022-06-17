@@ -13,7 +13,7 @@ import {
   getContestByIdSaga,
   downloadContestFileSaga,
 } from './contestsSagas';
-import { changeMarkSaga, setOfferStatusSaga, addOfferSaga } from './offerSagas';
+import { changeMarkSaga, setOfferStatusSaga, addOfferSaga, getOffersSaga } from './offerSagas';
 import {
   previewSaga,
   getDialog,
@@ -40,6 +40,7 @@ function* rootSaga() {
   yield takeEvery(ACTION.GET_CONTESTS_FOR_CREATIVE, activeContestsSaga);
   yield takeLatest(ACTION.DOWNLOAD_CONTEST_FILE_ACTION, downloadContestFileSaga);
   yield takeLatest(ACTION.UPDATE_CONTEST_ACTION, updateContestSaga);
+  yield takeLatest(ACTION.GET_OFFERS_ACTION, getOffersSaga);
   yield takeEvery(ACTION.SET_OFFER_ACTION, addOfferSaga);
   yield takeLatest(ACTION.SET_OFFER_STATUS_ACTION, setOfferStatusSaga);
   yield takeLatest(ACTION.CHANGE_MARK_ACTION, changeMarkSaga);

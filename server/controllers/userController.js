@@ -30,7 +30,8 @@ module.exports.changeMark = async (req, res, next) => {
   let avg = 0;
   let transaction;
   const { isFirst, offerId, mark, creatorId } = body;
-  const userId = tokenData.userId;
+  const userId = tokenData.id;
+
   try {
     transaction = await sequelize.transaction(
       { isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED });

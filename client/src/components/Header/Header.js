@@ -36,12 +36,23 @@ class Header extends React.Component {
               <img src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`} alt="menu" />
               <ul>
                 <li>
+                  {
+                  this.props.data.role === CONSTANTS.MODERATOR 
+                  ?
+                  <Link
+                    to="/moderator"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <span>View Offers</span>
+                  </Link>
+                  :
                   <Link
                     to="/dashboard"
                     style={{ textDecoration: 'none' }}
                   >
                     <span>View Dashboard</span>
                   </Link>
+                  }
                 </li>
                 <li><Link to="/account" style={{ textDecoration: 'none' }}><span>My Account</span></Link></li>
                 <li>
@@ -189,7 +200,7 @@ class Header extends React.Component {
                   </li>
                 </ul>
               </div>
-              {this.props.data && this.props.data.role !== CONSTANTS.CREATOR
+              {this.props.data && this.props.data.role === CONSTANTS.CUSTOMER
                         && <div className={styles.startContestBtn} onClick={this.startContests}>START CONTEST</div>}
             </div>
           </div>

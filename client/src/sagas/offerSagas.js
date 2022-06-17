@@ -1,7 +1,7 @@
 import { put, select } from 'redux-saga/effects';
 import ACTION from '../actions/actionTypes';
 import * as restController from '../api/rest/restController';
-import CONSTANTS from '../constants';
+//import CONSTANTS from '../constants';
 
 export function* changeMarkSaga(action) {
   try {
@@ -37,14 +37,36 @@ export function* setOfferStatusSaga(action) {
     const { data } = yield restController.setOfferStatus(action.data);
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
-      if (data.status === CONSTANTS.OFFER_STATUS_WON) {
+      /*if (data.status === CONSTANTS.OFFER_STATUS_WON) {
         offer.status = data.id === offer.id ? CONSTANTS.OFFER_STATUS_WON : CONSTANTS.OFFER_STATUS_REJECTED;
       } else if (data.id === offer.id) {
         offer.status = CONSTANTS.OFFER_STATUS_REJECTED;
+      }*/
+      if(data.id === offer.id){
+        offer.status = data.status;
       }
     });
     yield put({ type: ACTION.CHANGE_STORE_FOR_STATUS, data: offers });
+    if(data){
+      const offers = yield select((state) => state.offersStore.offers);
+      offers.forEach((offer) => {
+        if(data.id === offer.id){
+          offer.status = data.status;
+        }
+      })
+      yield put({ type: ACTION.GET_OFFERS_NEW_STATUS, data: offers });
+    }
   } catch (e) {
     yield put({ type: ACTION.SET_OFFER_STATUS_ERROR, error: e.response });
+  }
+}
+
+export function* getOffersSaga(action) {
+  yield put({ type: ACTION.GET_OFFERS_REQUEST });
+  try {
+    const { data } = yield restController.getOffers(action.data);
+    yield put({ type: ACTION.GET_OFFERS_SUCCESS, data });
+  } catch (e) {
+    yield put({ type: ACTION.GET_OFFERS_ERROR, error: e.response });
   }
 }

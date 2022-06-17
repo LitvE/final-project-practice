@@ -27,6 +27,8 @@ export const getCustomersContests = (data) =>
   http.get(`/contests/customersContests?limit=${data.limit}&offset=${data.offset}&status=${data.contestStatus}`
   );
 
+export const getOffers = (data) => http.get(`/contests/getOffers?limit=${data.limit}&offset=${data.offset}`);
+
 export const getContestById = ({contestId}) => http.get(`/contests/${contestId}`);
 
 /*export const getActiveContests = ({

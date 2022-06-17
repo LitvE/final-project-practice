@@ -1,12 +1,12 @@
 [
   "1createUsers.js",
   "create-Banks.js",
+  "create-Catalog.js",
   "create-Contests.js",
+  "create-Conversation.js",
+  "create-Message.js",
   "create-Offers.js",
   "create-Ratings.js",
   "create-Selects.js",
-  "create-Tokens.js",
-  "create-Catalog.js",
-  "create-Conversation.js",
-  "create-Message.js"
+  "create-Tokens.js"
 ]

@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: "anon.png",
       },
-      role: DataTypes.ENUM("customer", "creator"),
+      role: DataTypes.ENUM("customer", "creator", "moderator"),
       balance: {
         type: DataTypes.DECIMAL,
         allowNull: false,

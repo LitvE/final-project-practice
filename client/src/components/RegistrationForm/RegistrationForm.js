@@ -28,6 +28,17 @@ class RegistrationForm extends React.Component {
         },
         history: this.props.history,
       });
+      console.log({
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          displayName: values.displayName,
+          email: values.email,
+          password: values.password,
+          role: values.role,
+        },
+        history: this.props.history,
+      });
     };
 
     render() {
@@ -132,6 +143,15 @@ class RegistrationForm extends React.Component {
                   infoRole="I plan to submit name ideas, Logo designs or sell names in Domain Marketplace."
                   component={RoleInput}
                   id={CONSTANTS.CREATOR}
+                />
+                <Field
+                  name="role"
+                  type="radio"
+                  value={CONSTANTS.MODERATOR}
+                  strRole="Join As a Moderator"
+                  infoRole="I plan to moderate the offers for the contests."
+                  component={RoleInput}
+                  id={CONSTANTS.MODERATOR}
                 />
               </div>
               <div className={styles.termsOfService}>

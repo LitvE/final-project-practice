@@ -21,6 +21,7 @@ import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatCo
 import HowItWorksPage from './pages/HowItWorks/HowItWorksPage';
 import EventsPage from './pages/EventsPage/EventsPage';
 import EventForm from './components/Events/EventForm/EventForm';
+import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
 
 class App extends Component {
   render() {
@@ -73,6 +74,7 @@ class App extends Component {
           <Route exact path="/how-it-works" component={HowItWorksPage} />
           <Route exact path="/events" component={EventsPage} />
           <Route exact path="/events/form" component={EventForm} />
+          <Route exact path="/moderator" component={ModeratorPage} />
           <Route component={NotFound} />
         </Switch>
         <ChatContainer />

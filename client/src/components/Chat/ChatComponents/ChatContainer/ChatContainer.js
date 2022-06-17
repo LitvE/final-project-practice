@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import CONSTANTS from '../../../../constants';
 import Chat from '../Chat/Chat';
 
 const ChatContainer = (props) => {
   const { data } = props;
   return (
     <>
-      {data ? <Chat /> : null}
+      {data && data.role !== CONSTANTS.MODERATOR ? <Chat /> : null}
     </>
   );
 };
