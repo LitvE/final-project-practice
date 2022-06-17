@@ -50,7 +50,6 @@ class ModeratorPage extends Component {
     }
   }
 
-
   render() {
     const {offers, setOfferStatus} = this.props;
     console.log(offers);
