@@ -209,8 +209,6 @@ const emitMassage = async (creatorId, text, contestId, id) => {
 const rejectOffer = async (offerId, creatorId, contestId, id) => {
   const rejectedOffer = await contestQueries.updateOffer(
     { status: CONSTANTS.OFFER_STATUS_REJECTED }, { id: offerId }); 
-  /*controller.getNotificationController().emitChangeOfferStatus(creatorId,
-    'Someone of yours offers was rejected', contestId);*/
   const text = 'Someone of yours offers was rejected';
   emitMassage(creatorId, text, contestId, id);
   return rejectedOffer;
@@ -219,8 +217,6 @@ const rejectOffer = async (offerId, creatorId, contestId, id) => {
 const approveOffer = async (offerId, creatorId, contestId, id) => {
   const approvedOffer = await contestQueries.updateOffer(
     { status: CONSTANTS.OFFER_STATUS_APPROVED }, { id: offerId });
-    /*controller.getNotificationController().emitChangeOfferStatus(creatorId,
-      'Someone of yours offers was approved by the moderator', contestId);*/
       const text = 'Someone of yours offers was approved by the moderator';
       emitMassage(creatorId, text, contestId, id);
     return approvedOffer;
