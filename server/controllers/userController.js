@@ -125,6 +125,7 @@ module.exports.payment = async (req, res, next) => {
 
 module.exports.updateUser = async (req, res, next) => {
   const { file, body, tokenData: { id } } = req;
+  console.log(file);
   try {
     if (file) {
       body.avatar = file.filename;

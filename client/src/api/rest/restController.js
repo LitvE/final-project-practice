@@ -11,7 +11,11 @@ export const loginRequest = (data) => http.post("/auth/sign-in", data);
 
 export const getUser = () => http.post("users/getUser");
 
-export const updateUser = (data) => http.post("/users/updateUser", data);
+export const updateUser = (data) => http.post("/users/updateUser", data, {
+  headers: {
+      "Content-type": "multipart/form-data"
+  },
+});
 
 export const changeMark = (data) => http.post("/users/changeMark", data);
 
