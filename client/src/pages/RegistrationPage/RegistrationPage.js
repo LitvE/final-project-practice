@@ -158,7 +158,7 @@ const RegistrationPage = (props) => {
               <span
                 className={styles.orangeSpan}
               >
-message
+                message
               </span>
               . For assistance
               with launching a contest,
@@ -166,7 +166,7 @@ message
               <span
                 className={styles.orangeSpan}
               >
-Branding Consultation
+                Branding Consultation
               </span>
             </div>
           </div>

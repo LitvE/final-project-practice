@@ -4,7 +4,6 @@ import styles from './OffersList.module.sass';
 
 function OffersList(props) {
   const {offers, setOfferStatus} = props;
-  //console.log(offers);
   return (
     <div className={styles.listContainer}>
         <ul className={styles.ulStyles}>

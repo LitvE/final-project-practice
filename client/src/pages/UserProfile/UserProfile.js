@@ -46,22 +46,22 @@ const UserProfile = (props) => {
           </div>
         </div>
         {
-                    profileModeView === CONSTANTS.USER_INFO_MODE
-                      ? <UserInfo />
-                      : (
-                        <div className={styles.container}>
-                          {parseInt(balance) === 0
-                            ? <span className={styles.notMoney}>There is no money on your balance</span>
-                            : (
-                              <div>
-                                {error
-                                    && <Error data={error.data} status={error.status} clearError={clearPaymentStore} />}
-                                <PayForm sendRequest={pay} />
-                              </div>
-                            )}
-                        </div>
-                      )
-                }
+          profileModeView === CONSTANTS.USER_INFO_MODE
+            ? <UserInfo />
+            : (
+                <div className={styles.container}>
+                  {parseInt(balance) === 0
+                  ? <span className={styles.notMoney}>There is no money on your balance</span>
+                  : (
+                      <div>
+                        {error
+                          && <Error data={error.data} status={error.status} clearError={clearPaymentStore} />}
+                          <PayForm sendRequest={pay} />
+                      </div>
+                      )}
+                </div>
+              )
+          }
       </div>
     </div>
   );

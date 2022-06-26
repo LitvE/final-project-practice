@@ -86,7 +86,6 @@ module.exports.bonusToPay = async () => {
   
     selectedContests.forEach(async (sc) => {
         const userToUpdateBalance = await User.findByPk(sc.User.id);
-  
         userToUpdateBalance.update({
             balance: (sc.User.balance + (sc.dataValues.totalPrizes*0.1)),
         });
@@ -109,9 +108,7 @@ module.exports.bonusForRating = async () => {
     );
 
     creatorsWithHighestRating.forEach(async (creator) => {
-      
       const userToUpdateBalance = await User.findByPk(creator.id);
-
       userToUpdateBalance.update({
           balance: (creator.balance + 10.00),
       });

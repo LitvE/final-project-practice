@@ -32,7 +32,6 @@ const variableOptions = {
 class ContestForm extends React.Component {
     getPreference = () => {
       const { contestType } = this.props;
-      //console.log(contestType);
       switch (contestType) {
         case CONSTANTS.NAME_CONTEST: {
           this.props.getData({

@@ -131,63 +131,63 @@ class ContestPage extends React.Component {
           <Header />
           {error ? <div className={styles.tryContainer}><TryAgain getData={getData} /></div>
             : (
-              isFetching
+                isFetching
                 ? (
                   <div className={styles.containerSpinner}>
                     <Spinner />
                   </div>
-                )
+                  )
                 : (
-                  <div className={styles.mainInfoContainer}>
-                    <div className={styles.infoContainer}>
-                      <div className={styles.buttonsContainer}>
-                        <span
-                          onClick={() => changeContestViewMode(true)}
-                          className={classNames(styles.btn, { [styles.activeBtn]: isBrief })}
-                        >
-Brief
-</span>
-                        <span
-                          onClick={() => changeContestViewMode(false)}
-                          className={classNames(styles.btn, { [styles.activeBtn]: !isBrief })}
-                        >
-Offer
-</span>
+                    <div className={styles.mainInfoContainer}>
+                      <div className={styles.infoContainer}>
+                        <div className={styles.buttonsContainer}>
+                          <span
+                            onClick={() => changeContestViewMode(true)}
+                            className={classNames(styles.btn, { [styles.activeBtn]: isBrief })}
+                          >
+                            Brief
+                          </span>
+                          <span
+                            onClick={() => changeContestViewMode(false)}
+                            className={classNames(styles.btn, { [styles.activeBtn]: !isBrief })}
+                          >
+                            Offer
+                          </span>
+                        </div>
+                        {
+                          isBrief
+                          ? <Brief contestData={contestData} role={role} goChat={this.goChat} />
+                          : (
+                              <div className={styles.offersContainer}>
+                              {(role === CONSTANTS.CREATOR && contestData.status === CONSTANTS.CONTEST_STATUS_ACTIVE)
+                              && (
+                                <OfferForm
+                                  contestType={contestData.contestType}
+                                  contestId={contestData.id}
+                                  customerId={contestData.User.id}
+                                />
+                              )}
+                              {setOfferStatusError && (
+                                <Error
+                                data={setOfferStatusError.data}
+                                status={setOfferStatusError.status}
+                                clearError={clearSetOfferStatusError}
+                                />
+                              )}
+                              <div className={styles.offers}>
+                                {this.setOffersList()}
+                              </div>
+                              </div>
+                            )
+                        }
                       </div>
-                      {
-                                        isBrief
-                                          ? <Brief contestData={contestData} role={role} goChat={this.goChat} />
-                                          : (
-                                            <div className={styles.offersContainer}>
-                                              {(role === CONSTANTS.CREATOR && contestData.status === CONSTANTS.CONTEST_STATUS_ACTIVE)
-                                                && (
-                                                <OfferForm
-                                                  contestType={contestData.contestType}
-                                                  contestId={contestData.id}
-                                                  customerId={contestData.User.id}
-                                                />
-                                                )}
-                                              {setOfferStatusError && (
-                                              <Error
-                                                data={setOfferStatusError.data}
-                                                status={setOfferStatusError.status}
-                                                clearError={clearSetOfferStatusError}
-                                              />
-                                              )}
-                                              <div className={styles.offers}>
-                                                {this.setOffersList()}
-                                              </div>
-                                            </div>
-                                          )
-}
+                      <ContestSideBar
+                        contestData={contestData}
+                        totalEntries={offers.length}
+                      />
                     </div>
-                    <ContestSideBar
-                      contestData={contestData}
-                      totalEntries={offers.length}
-                    />
-                  </div>
-                )
-            )}
+                  )
+              )}
         </div>
       );
     }

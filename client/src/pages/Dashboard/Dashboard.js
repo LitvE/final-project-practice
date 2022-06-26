@@ -11,10 +11,10 @@ const Dashboard = (props) => {
     <div>
       <Header />
       {
-                role === CONSTANTS.CUSTOMER
-                  ? <CustomerDashboard history={history} match={props.match} />
-                  : <CreatorDashboard history={history} match={props.match} />
-            }
+        role === CONSTANTS.CUSTOMER
+          ? <CustomerDashboard history={history} match={props.match} />
+          : <CreatorDashboard history={history} match={props.match} />
+      }
     </div>
   );
 };

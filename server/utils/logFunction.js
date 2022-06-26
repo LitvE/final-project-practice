@@ -14,6 +14,5 @@ module.exports.errorLogging = (error) => {
             console.error(err);
             return;
         }
-
     });
 }

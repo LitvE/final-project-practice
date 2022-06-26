@@ -1,5 +1,4 @@
 import http from "../interceptor";
-//import queryString from "query-string";
 
 //auth
 
@@ -34,16 +33,6 @@ export const getCustomersContests = (data) =>
 export const getOffers = (data) => http.get(`/contests/getOffers?limit=${data.limit}&offset=${data.offset}`);
 
 export const getContestById = ({contestId}) => http.get(`/contests/${contestId}`);
-
-/*export const getActiveContests = ({
-  offset, limit, typeIndex, contestId, industry, awardSort, ownEntries,
-}) => http.post('/contests/getAllContests', {
-  offset, limit, typeIndex, contestId, industry, awardSort, ownEntries,
-});*/
-
-/*export const getActiveContests = (data) => {
-  http.post(`/contests?${queryString(data)}`)
-};*/
 
 export const getActiveContests = (data) => http.post(`/contests/?limit=${data.limit}&&offset=${data.offset}&&typeIndex=${data.typeIndex}&&contestId=${data.contestId}&&industry=${data.industry}&&awardSort=${data.awardSort}&&ownEntries=${data.ownEntries}`);
 

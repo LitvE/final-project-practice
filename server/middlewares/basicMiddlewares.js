@@ -1,6 +1,5 @@
 const bd = require('../db/models');
 const { Contest } = require('../db/models');
-//const NotFound = require('../errors/UserNotFoundError');
 const RightsError = require('../errors/RightsError');
 const ServerError = require('../errors/ServerError');
 const CONSTANTS = require('../constants');

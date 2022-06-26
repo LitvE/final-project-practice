@@ -4,10 +4,6 @@ import CONTANTS from '../../../constants';
 import { addMessage, changeBlockStatusInStore } from '../../../actions/actionCreator';
 
 class ChatSocket extends WebSocket {
-  /*constructor(dispatch, getState, room) {
-    super(dispatch, getState, room);
-  }*/
-
     anotherSubscribes = () => {
       this.onNewMessage();
       this.onChangeBlockStatus();

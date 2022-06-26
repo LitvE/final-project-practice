@@ -23,9 +23,6 @@ function OfferItem(props) {
     };
 
     const needButtons = (offerStatus) => {
-        //const contestCreatorId = this.props.contestByIdStore.contestData.User.id;
-        //const userId = this.props.userStore.data.id;
-        //const contestStatus = this.props.contestByIdStore.contestData.status;
         const contestStatus = offer.Contest.status;
         return (contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE && offerStatus === CONSTANTS.OFFER_STATUS_PENDING);
     };

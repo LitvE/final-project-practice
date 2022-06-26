@@ -12,7 +12,6 @@ import Spinner from '../../components/Spinner/Spinner';
 const Home = (props) => {
   const [index, setIndex] = useState(0);
   const [styleName, setStyle] = useState(styles.headline__static);
-  //let timeout;
 
   useEffect(() => {
     let timeout = setInterval(() => {

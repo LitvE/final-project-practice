@@ -11,7 +11,7 @@ module.exports.jobToSchedule = () => {
     const job = schedule.scheduleJob(rule, function(){
         fs.readFile('/server/errors/errors.log', (err, data) => {
             if (err) {
-              console.error(err)
+              console.error(err);
               return
             } else {
                 const date = new Date();
@@ -40,7 +40,7 @@ module.exports.jobToSchedule = () => {
                         
                         fs.appendFile(`/server/errors/logs/${date.getTime()}.log`, contentToString + '\n', (err) => {
                             if (err) {
-                            console.error(err)
+                            console.error(err);
                             return
                             }
                         })
@@ -49,7 +49,7 @@ module.exports.jobToSchedule = () => {
 
                 fs.truncate('/server/errors/errors.log', (err) => {
                     if (err) {
-                        console.error(err)
+                        console.error(err);
                         return
                     }
                     console.log("Old file is cleared!");

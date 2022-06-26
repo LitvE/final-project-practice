@@ -19,10 +19,9 @@ exports.signInUser = async (req, res, next) => {
     if (foundUser) {
       const data = await authService.createSession(foundUser);
       const accessToken = data.tokenPair.accessToken;
-      console.log(accessToken);
       res.send({ token: accessToken });
     }
-    next(/*createHtppError(401, "Error password or email")*/);
+    next();
   } catch (err) {
     errorLogging(err);
     next(err);

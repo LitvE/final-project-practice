@@ -4,7 +4,6 @@ const initialState = {
     isFetching: false,
     error: null,
     offers: [],
-    //haveMore: true,
 };
 
 export default function getOffersReducer (state=initialState, action){

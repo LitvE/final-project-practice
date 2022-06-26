@@ -26,10 +26,7 @@ function HowItWorksPage() {
         <FeatureDiv />
         <Footer />
       </>
-
-
   )
-  
 }
 
 export default HowItWorksPage
