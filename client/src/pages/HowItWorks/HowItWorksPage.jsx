@@ -7,7 +7,7 @@ import HowDoesSHWork from '../../components/HowDoesSHWork/HowDoesSHWork';
 import OurServices from '../../components/OurServices/OurServices';
 import NamingContest from '../../components/NamingContest/NamingContest';
 import TopicsSection from '../../components/TopicsSection/TopicsSection';
-import FeatureDiv from '../../components/FeatureDiv /FeatureDiv';
+import FeatureDiv from '../../components/FeatureDiv/FeatureDiv';
 import ReadyToStart from '../../components/ReadyToStart/ReadyToStart';
 
 function HowItWorksPage() {
