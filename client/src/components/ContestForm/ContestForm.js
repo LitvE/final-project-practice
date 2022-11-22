@@ -13,6 +13,7 @@ import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
 import Schems from '../../validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
+import ButtonGroupComponent from '../ButtonGroupComponent/ButtonGroupComponent';
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {
@@ -156,6 +157,7 @@ class ContestForm extends React.Component {
                     ? <button type="submit" className={styles.changeData}>Set Data</button> : null}
                 </Form>
               </Formik>
+              <ButtonGroupComponent />
             </div>
           </>
         );

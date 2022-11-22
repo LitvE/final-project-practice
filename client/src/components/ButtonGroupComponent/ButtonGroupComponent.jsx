@@ -15,6 +15,10 @@ function ButtonGroupComponent() {
 
   return (
     <div className={styles.container}>
+        <div className={styles.textHeader}>
+            <p className={styles.p1}>Do you want a matching domain (.com URL) with your name?</p>
+            <p className={styles.p2}>If you want a matching domain, our platform will only accept those name suggestions where the domain is available. (Recommended)</p>
+        </div>
         <div id='deck' className={styles.cardDeck}>
             <div className={styles.cardFrame} onClick={changeStyleOnClick}>
                 <div className={styles.cardBody}>
