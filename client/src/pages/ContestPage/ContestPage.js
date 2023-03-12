@@ -165,6 +165,7 @@ class ContestPage extends React.Component {
                                   contestType={contestData.contestType}
                                   contestId={contestData.id}
                                   customerId={contestData.User.id}
+                                  valid={true}
                                 />
                               )}
                               {setOfferStatusError && (

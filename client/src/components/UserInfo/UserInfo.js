@@ -12,7 +12,6 @@ const UserInfo = (props) => {
     formData.append('firstName', values.firstName);
     formData.append('lastName', values.lastName);
     formData.append('displayName', values.displayName);
-    console.log(values);
     props.updateUser(formData);
   };
 

@@ -8,14 +8,14 @@ const upload = require('../utils/fileUpload');
 const userRouter = express.Router();
 
 
-userRouter.post(
+userRouter.put(
   '/changeMark',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
   userController.changeMark,
 );
 
-userRouter.post(
+userRouter.put(
   '/updateUser',
   checkToken.checkToken,
   upload.uploadAvatar,
@@ -40,7 +40,7 @@ userRouter.post(
   userController.cashout,
 );
 
-userRouter.post(
+userRouter.get(
   '/getUser',
   checkToken.checkAuth,
 );

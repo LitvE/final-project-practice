@@ -137,6 +137,7 @@ module.exports.updateContest = async (req, res, next) => {
 
 module.exports.setNewOffer = async (req, res, next) => {
   const { file, tokenData: { id }, body: { contestType, offerData, contestId, customerId } } = req;
+  console.log(file);
   const obj = {};
   if (contestType === CONSTANTS.LOGO_CONTEST) {
     obj.fileName = file.filename;

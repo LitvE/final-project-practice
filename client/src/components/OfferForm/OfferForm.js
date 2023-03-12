@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import CONTANTS from '../../constants';
@@ -10,11 +10,15 @@ import Schems from '../../validators/validationSchems';
 import Error from '../Error/Error';
 
 const OfferForm = (props) => {
+
+  const [offerData, setOfferData] = useState(null);
+
   const renderOfferInput = () => {
     if (props.contestType === CONTANTS.LOGO_CONTEST) {
       return (
         <ImageUpload
           name="offerData"
+          setofferdata={setOfferData}
           classes={{
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
@@ -26,6 +30,7 @@ const OfferForm = (props) => {
     return (
       <FormInput
         name="offerData"
+        setofferdata={setOfferData}
         classes={{
           container: styles.inputContainer,
           input: styles.input,
@@ -44,7 +49,8 @@ const OfferForm = (props) => {
     const { contestId, contestType, customerId } = props;
     data.append('contestId', contestId);
     data.append('contestType', contestType);
-    data.append('offerData', values.offerData);
+    //data.append('offerData', values.offerData);
+    data.append('offerData', offerData ? offerData : values.offerData);
     data.append('customerId', customerId);
     props.setNewOffer(data);
     resetForm();
@@ -52,6 +58,7 @@ const OfferForm = (props) => {
 
   const { valid, addOfferError, clearOfferError } = props;
   const validationSchema = props.contestType === CONTANTS.LOGO_CONTEST ? Schems.LogoOfferSchema : Schems.TextOfferSchema;
+
   return (
     <div className={styles.offerContainer}>
       {addOfferError

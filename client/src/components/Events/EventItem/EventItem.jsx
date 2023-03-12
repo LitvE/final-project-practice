@@ -4,8 +4,18 @@ import styles from './EventItem.module.sass';
 
 export default class EventItem extends Component {
 
+  constructor(props) {
+    super(props)
+    this.changeCount = this.changeCount.bind(this)
+  }
+  changeCount () {
+    this.props.countChange();
+  };
+
   render() {
-    const {event, index, length} = this.props;
+    const {event, index, length } = this.props;
+
+  
 
     const flexStyle = {
       flexGrow: (index/length),
@@ -17,7 +27,7 @@ export default class EventItem extends Component {
             <div>{event.eventName}</div>
           </div>
           <div style={flexStyle} className={styles.eventTimerDivStyle}>
-            <CountDown data={event}/>
+            <CountDown data={event} changeCount={this.changeCount}/>
           </div> 
       </div>
     )

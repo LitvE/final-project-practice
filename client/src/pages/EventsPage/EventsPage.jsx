@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import EventsList from '../../components/Events/EventsList/EventsList';
 import styles from './EventsPage.module.sass';
+import Header from '../../components/Header/Header';
 
 
 function EventsPage() {
@@ -21,10 +22,14 @@ function EventsPage() {
   },[]);
 
   return (
-    <div className={styles.container}>
+    <div>
+      <Header />
+      <div className={styles.container}>
         <EventsList events={events} />
         <Link to="/events/form">ADD NEW EVENT</Link>
+      </div>
     </div>
+
   )
 }
 

@@ -8,15 +8,15 @@ export const loginRequest = (data) => http.post("/auth/sign-in", data);
 
 //users
 
-export const getUser = () => http.post("users/getUser");
+export const getUser = () => http.get("users/getUser");
 
-export const updateUser = (data) => http.post("/users/updateUser", data, {
+export const updateUser = (data) => http.put("/users/updateUser", data, {
   headers: {
       "Content-type": "multipart/form-data"
   },
 });
 
-export const changeMark = (data) => http.post("/users/changeMark", data);
+export const changeMark = (data) => http.put("/users/changeMark", data);
 
 export const payMent = (data) => http.post("/users/pay", data.formData);
 
@@ -34,42 +34,46 @@ export const getOffers = (data) => http.get(`/contests/getOffers?limit=${data.li
 
 export const getContestById = ({contestId}) => http.get(`/contests/${contestId}`);
 
-export const getActiveContests = (data) => http.post(`/contests/?limit=${data.limit}&&offset=${data.offset}&&typeIndex=${data.typeIndex}&&contestId=${data.contestId}&&industry=${data.industry}&&awardSort=${data.awardSort}&&ownEntries=${data.ownEntries}`);
+export const getActiveContests = (data) => http.get(`/contests/?limit=${data.limit}&&offset=${data.offset}&&typeIndex=${data.typeIndex}&&contestId=${data.contestId}&&industry=${data.industry}&&awardSort=${data.awardSort}&&ownEntries=${data.ownEntries}`);
 
 export const downloadContestFile = (data) =>
   http.get(`/contests/downloadFile/${data.fileName}`);
 
 export const updateContest = (data) =>
-  http.post("/contests/updateContest", data);
+  http.put("/contests/updateContest", data);
 
-export const setNewOffer = (data) => http.post("/contests/setNewOffer", data);
+export const setNewOffer = (data) => http.post("/contests/setNewOffer", data, {
+  headers: {
+      "Content-type": "multipart/form-data"
+  },
+});
 
 export const setOfferStatus = (data) =>
   http.post("/contests/setOfferStatus", data);
 
 //chat
 
-export const getPreviewChat = () => http.post("/chats/getPreview");
+export const getPreviewChat = () => http.get("/chats/getPreview");
 
-export const getDialog = (data) => http.post("/chats/getChat", data);
+export const getDialog = (data) => http.get("/chats/getChat", data);
 
 export const newMessage = (data) => http.post("/chats/newMessage", data);
 
-export const changeChatFavorite = (data) => http.post("/chats/favorite", data);
+export const changeChatFavorite = (data) => http.put("/chats/favorite", data);
 
-export const changeChatBlock = (data) => http.post("/chats/blackList", data);
+export const changeChatBlock = (data) => http.put("/chats/blackList", data);
 
-export const getCatalogList = (data) => http.post("/chats/getCatalogs", data);
+export const getCatalogList = (data) => http.get("/chats/getCatalogs", data);
 
 export const addChatToCatalog = (data) =>
   http.post("/chats/addNewChatToCatalog", data);
 
 export const createCatalog = (data) => http.post("/chats/createCatalog", data);
 
-export const deleteCatalog = (data) => http.post("/chats/deleteCatalog", data);
+export const deleteCatalog = (data) => http.delete("/chats/deleteCatalog", data);
 
 export const removeChatFromCatalog = (data) =>
-  http.post("/chats/removeChatFromCatalog", data);
+  http.patch("/chats/removeChatFromCatalog", data);
 
 export const changeCatalogName = (data) =>
-  http.post("/chats/updateNameCatalog", data);
+  http.patch("/chats/updateNameCatalog", data);

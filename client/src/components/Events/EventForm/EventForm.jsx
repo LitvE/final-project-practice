@@ -30,7 +30,9 @@ function EventForm(props) {
           eventWarning: warning,
       };
       events.push(obj);
+
       localStorage.setItem('Events', JSON.stringify(events));
+
       setName('');
       setDate('');
       setTime('');

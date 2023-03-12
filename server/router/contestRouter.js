@@ -33,7 +33,7 @@ contestRouter.get(
   contestController.getContestById,
 );
 
-contestRouter.post(
+contestRouter.get(
   '/',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
@@ -46,7 +46,7 @@ contestRouter.get(
   contestController.downloadFile,
 );
 
-contestRouter.post(
+contestRouter.put(
   '/updateContest',
   checkToken.checkToken,
   upload.updateContestFile,
